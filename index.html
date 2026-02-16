@@ -20,7 +20,7 @@
         }
 
         body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 20px; display: flex; justify-content: center; min-height: 100vh; }
-        .container { width: 100%; max-width: 800px; /* Aumentei a largura para caber os relatorios */ box-sizing: border-box; display: flex; flex-direction: column; align-items: center; }
+        .container { width: 100%; max-width: 800px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; }
         
         .app-card { width: 100%; max-width: 500px; background: var(--card-bg); padding: 30px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; margin-top: 20px; transition: all 0.3s ease; position: relative;}
         .hidden { display: none !important; }
@@ -46,46 +46,68 @@
         .btn-primary { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; }
         .btn-success { background: var(--success); color: white; }
         .btn-sm { padding: 8px 15px; width: auto; font-size: 0.9rem; }
-        input[type="text"], input[type="password"], select, textarea { width: 100%; padding: 14px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 10px; background: #fafafa; box-sizing: border-box; font-family: inherit; font-size: 1rem;}
+        input[type="text"], input[type="password"], input[type="date"], select, textarea { width: 100%; padding: 14px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 10px; background: #fafafa; box-sizing: border-box; font-family: inherit; font-size: 1rem;}
         .input-row { display: flex; gap: 10px; }
         .input-row input { flex: 1; }
         .required-field::after { content: " *"; color: var(--danger); }
 
-        /* Kit Praia */
+        /* --- KIT PRAIA (LAYOUT AJUSTADO "AO LADO") --- */
         .beach-kit-container { background: #e3f2fd; border: 1px solid #90caf9; padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: left; animation: slideDown 0.3s ease-out; }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        .checkbox-group { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
-        .checkbox-item { display: flex; align-items: center; gap: 10px; font-size: 0.95rem; cursor: pointer;}
+        
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            height: 40px;
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            width: 150px;
+        }
         input[type="checkbox"] { transform: scale(1.3); margin: 0; cursor: pointer; }
+        
+        /* Inputs que aparecem ao lado */
+        .dynamic-input { 
+            flex: 1;
+            margin-bottom: 0 !important; 
+            padding: 8px !important;
+            height: 38px;
+            display: none;
+            font-size: 0.9rem !important;
+        }
 
-        /* --- DASHBOARD MASTER (NOVO VISUAL) --- */
+        /* --- PÔR DO SOL (SUNSET) --- */
+        .sunset-container { background: #fff3e0; border: 1px solid #ffb74d; padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: center; animation: slideDown 0.3s ease-out; }
+        /* IMAGEM DO PÔR DO SOL */
+        .sunset-img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
+        
+        .price-tag { background: #2ecc71; color: white; padding: 5px 10px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; margin-bottom: 10px; display: inline-block;}
+        .time-info { font-size: 0.9rem; color: #666; margin-bottom: 10px; display: block; }
+
+        /* --- DASHBOARD MASTER --- */
         .dashboard-container { width: 100%; max-width: 800px; margin-top: 20px; }
         .dashboard-card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 20px; }
-        
         .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 20px; }
         .kpi-box { background: #f8f9fa; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #eee; }
         .kpi-value { font-size: 1.8rem; font-weight: 800; color: var(--primary); display: block; }
         .kpi-label { font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 5px; }
 
-        /* Tabela Comparativa */
-        .comparison-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.9rem; }
-        .comparison-table th { text-align: left; padding: 10px; background: #eee; color: #555; font-size: 0.8rem; }
-        .comparison-table td { padding: 10px; border-bottom: 1px solid #eee; }
-        .comparison-table tr:last-child td { border-bottom: none; }
-
-        /* Barras de Progresso */
-        .bar-row { margin-bottom: 12px; }
-        .bar-label { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 5px; color: #555; }
-        .bar-track { background: #eee; height: 8px; border-radius: 4px; overflow: hidden; }
-        .bar-fill { height: 100%; background: var(--accent); border-radius: 4px; }
-
-        /* Tickets na Lista */
+        /* Tickets */
         .ticket-card { background: white; padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 5px solid #ccc; text-align: left; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         .status-pendente { border-left-color: var(--danger); }
         .status-andamento { border-left-color: var(--warning); }
         .status-resolvido { border-left-color: var(--success); opacity: 0.7; }
         .tag { font-size: 0.75rem; padding: 3px 8px; border-radius: 4px; background: #eee; font-weight: 600; }
         .tag-hotel { background: #e3f2fd; color: #0d47a1; }
+        .tag-sunset { background: #ffcc80; color: #e65100; }
+        
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -97,7 +119,7 @@
                 <div style="font-size: 2rem;">🏨</div>
                 <div class="lang-options">
                     <span onclick="mudarIdioma('pt')" class="lang-btn color-br active">BR</span>
-                    <span onclick="mudarIdioma('en')" class="lang-btn color-us">US</span>
+                    <span onclick="mudarIdioma('en')" class="lang-btn color-us">EN</span>
                     <span onclick="mudarIdioma('es')" class="lang-btn color-es">ES</span>
                 </div>
             </div>
@@ -132,7 +154,7 @@
                 </div>
                 <div class="lang-options">
                     <span onclick="mudarIdioma('pt')" class="lang-btn color-br active">BR</span>
-                    <span onclick="mudarIdioma('en')" class="lang-btn color-us">US</span>
+                    <span onclick="mudarIdioma('en')" class="lang-btn color-us">EN</span>
                     <span onclick="mudarIdioma('es')" class="lang-btn color-es">ES</span>
                 </div>
             </div>
@@ -144,9 +166,10 @@
                 <input type="text" id="telefone" placeholder="Telefone (Opcional)" data-ph="phone_placeholder">
             </div>
             
-            <select id="tipo" onchange="verificarOpcaoPraia()">
+            <select id="tipo" onchange="verificarOpcao()">
                 <option value="" disabled selected data-key="select_default">Selecione o que precisa...</option>
-                <option value="Praia" id="opt-praia" data-key="opt_beach">🏖️ Reserva de Praia</option>
+                <option value="Praia" id="opt-praia" data-key="opt_beach">🏖️ Aluguel Cadeira, Toalha, Cooler</option>
+                <option value="Sunset" id="opt-sunset" data-key="opt_sunset">🥂 Pôr do Sol com Espumante</option>
                 <option value="Serviço" data-key="opt_service">🛏️ Serviço de Quarto</option>
                 <option value="Manutenção" data-key="opt_maint">🛠️ Manutenção</option>
                 <option value="Sugestão" data-key="opt_idea">💡 Sugestão / Elogio</option>
@@ -154,12 +177,43 @@
             </select>
 
             <div id="area-kit-praia" class="beach-kit-container hidden">
-                <strong style="color:#0056b3;" data-key="beach_select_items">Selecione os itens:</strong>
-                <div class="checkbox-group">
-                    <label class="checkbox-item"><input type="checkbox" id="check-cadeira"> <span data-key="beach_chair">Cadeira de Praia</span></label>
-                    <label class="checkbox-item"><input type="checkbox" id="check-cooler"> <span data-key="beach_cooler">Cooler</span></label>
-                    <label class="checkbox-item"><input type="checkbox" id="check-toalha"> <span data-key="beach_towel">Toalha de Praia</span></label>
+                <strong style="color:#0056b3; display:block; margin-bottom:10px;" data-key="beach_select_items">Selecione os itens:</strong>
+                
+                <div class="checkbox-row">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="check-cadeira" onchange="toggleInput('check-cadeira', 'qtd-cadeira')"> 
+                        <span data-key="beach_chair">Cadeira de Praia</span>
+                    </label>
+                    <input type="number" id="qtd-cadeira" class="dynamic-input" min="1" placeholder="Quantidade">
                 </div>
+
+                <div class="checkbox-row">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="check-toalha" onchange="toggleInput('check-toalha', 'qtd-toalha')"> 
+                        <span data-key="beach_towel">Toalha de Praia</span>
+                    </label>
+                    <input type="number" id="qtd-toalha" class="dynamic-input" min="1" placeholder="Quantidade">
+                </div>
+
+                <div class="checkbox-row">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="check-cooler" onchange="toggleInput('check-cooler', 'detalhe-cooler')"> 
+                        <span data-key="beach_cooler">Cooler</span>
+                    </label>
+                    <input type="text" id="detalhe-cooler" class="dynamic-input" placeholder="Cerveja, água, refrigerante...">
+                </div>
+            </div>
+
+            <div id="area-sunset" class="sunset-container hidden">
+                <img src="img/por do sol.jpg" class="sunset-img" alt="Pôr do Sol">
+                
+                <h3 style="margin:5px 0;">Pôr do Sol com Espumante</h3>
+                <span class="price-tag">R$ 120,00</span>
+                <span class="time-info">⏰ 16:30 - 18:30</span>
+                
+                <label style="display:block; margin-top:10px; font-weight:bold;">Escolha a Data:</label>
+                <input type="date" id="data-sunset" style="margin-top:5px;">
+                <p style="font-size:0.8rem; color:#e65100;">* Máximo 5 reservas por dia.</p>
             </div>
 
             <textarea id="descricao" rows="4" placeholder="Descreva o pedido..." data-ph="desc_placeholder"></textarea>
@@ -177,42 +231,20 @@
             <div id="controle-master" class="dashboard-card hidden">
                 <label style="font-weight: bold; font-size: 0.9rem;">📊 Filtrar Visão:</label>
                 <select id="filtro-master-select" onchange="alterarFiltroMaster()" style="margin-top: 5px; padding: 10px;">
-                    <option value="TODOS">🏢 Todos os 3 Hotéis (Unificado)</option>
+                    <option value="TODOS">🏢 Todos os 3 Hotéis</option>
                     <option value="Hit Hotel">🌊 Hit Hotel</option>
                     <option value="Porto Salvador">⚓ Porto Salvador</option>
                     <option value="Porto das Ancoras">⛵ Porto das Âncoras</option>
                 </select>
 
-                <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
-
-                <div class="kpi-grid">
+                <div class="kpi-grid" style="margin-top:20px;">
                     <div class="kpi-box">
                         <span class="kpi-value" id="stat-pendente" style="color: var(--danger)">0</span>
-                        <span class="kpi-label">Pendentes Agora</span>
+                        <span class="kpi-label">Pendentes</span>
                     </div>
                     <div class="kpi-box">
                         <span class="kpi-value" id="stat-mes">0</span>
-                        <span class="kpi-label">Atendimentos no Mês</span>
-                    </div>
-                    <div class="kpi-box">
-                        <span class="kpi-value" id="stat-tempo" style="color: var(--accent)">--</span>
-                        <span class="kpi-label">Tempo Médio (min)</span>
-                    </div>
-                </div>
-
-                <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
-                    
-                    <div>
-                        <h4 style="margin-top:0;">📋 Categorias Mais Acionadas</h4>
-                        <div id="barras-relatorio"></div>
-                    </div>
-
-                    <div id="div-comparativo">
-                        <h4>🏆 Comparativo entre Hotéis</h4>
-                        <table class="comparison-table">
-                            <thead><tr><th>Hotel</th><th>Vol. Mês</th><th>Pendentes</th></tr></thead>
-                            <tbody id="tabela-comparativa"></tbody>
-                        </table>
+                        <span class="kpi-label">Total Mês</span>
                     </div>
                 </div>
             </div>
@@ -224,7 +256,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, query, where, onSnapshot, updateDoc, doc, orderBy, serverTimestamp } 
+        import { getFirestore, collection, addDoc, query, where, onSnapshot, updateDoc, doc, orderBy, serverTimestamp, getDocs } 
         from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
         // CONFIGURAÇÃO FIREBASE
@@ -244,23 +276,33 @@
         let isMaster = false;
         let currentLang = 'pt';
         
-        // Dicionário de Traduções (Mantido igual)
         const translations = {
             pt: {
                 login_title: "Acesso ao Sistema", login_subtitle: "Selecione uma opção abaixo:", guest: "Hóspede", admin_area: "Área Administrativa", pass_placeholder: "Senha...", enter_btn: "Entrar",
-                welcome_msg: "Bem-vindo! Como podemos ajudar?", room_placeholder: "Nº do Quarto *", phone_placeholder: "Telefone (Opcional)", select_default: "Selecione o que precisa...", opt_beach: "🏖️ Reserva de Praia", opt_service: "🛏️ Serviço de Quarto", opt_maint: "🛠️ Manutenção", opt_idea: "💡 Sugestão / Elogio", opt_complain: "📢 Reclamação", desc_placeholder: "Alguma observação extra?", send_btn: "Enviar Solicitação", back_btn: "Voltar", beach_select_items: "Selecione os itens:", beach_chair: "Cadeira de Praia", beach_cooler: "Cooler", beach_towel: "Toalha de Praia"
+                welcome_msg: "Bem-vindo! Como podemos ajudar?", room_placeholder: "Nº do Quarto *", phone_placeholder: "Telefone (Opcional)", select_default: "Selecione o que precisa...", 
+                opt_beach: "🏖️ Aluguel Cadeira, Toalha, Cooler",
+                opt_sunset: "🥂 Pôr do Sol com Espumante",
+                opt_service: "🛏️ Serviço de Quarto", opt_maint: "🛠️ Manutenção", opt_idea: "💡 Sugestão / Elogio", opt_complain: "📢 Reclamação", desc_placeholder: "Alguma observação extra?", send_btn: "Enviar Solicitação", back_btn: "Voltar", 
+                beach_select_items: "Selecione os itens:", beach_chair: "Cadeira de Praia", beach_cooler: "Cooler", beach_towel: "Toalha de Praia"
             },
             en: {
                 login_title: "System Access", login_subtitle: "Select an option below:", guest: "Guest", admin_area: "Staff Area", pass_placeholder: "Password...", enter_btn: "Login",
-                welcome_msg: "Welcome! How can we help?", room_placeholder: "Room Number *", phone_placeholder: "Phone (Optional)", select_default: "Select what you need...", opt_beach: "🏖️ Beach Reservation", opt_service: "🛏️ Room Service", opt_maint: "🛠️ Maintenance", opt_idea: "💡 Suggestion / Compliment", opt_complain: "📢 Complaint", desc_placeholder: "Any extra comments?", send_btn: "Send Request", back_btn: "Back", beach_select_items: "Select items:", beach_chair: "Beach Chair", beach_cooler: "Cooler", beach_towel: "Beach Towel"
+                welcome_msg: "Welcome! How can we help?", room_placeholder: "Room Number *", phone_placeholder: "Phone (Optional)", select_default: "Select what you need...", 
+                opt_beach: "🏖️ Rent Beach Chair, Towel, Cooler",
+                opt_sunset: "🥂 Sunset with Sparkling Wine",
+                opt_service: "🛏️ Room Service", opt_maint: "🛠️ Maintenance", opt_idea: "💡 Suggestion / Compliment", opt_complain: "📢 Complaint", desc_placeholder: "Any extra comments?", send_btn: "Send Request", back_btn: "Back", 
+                beach_select_items: "Select items:", beach_chair: "Beach Chair", beach_cooler: "Cooler", beach_towel: "Beach Towel"
             },
             es: {
                 login_title: "Acceso al Sistema", login_subtitle: "Seleccione una opción:", guest: "Huésped", admin_area: "Área Administrativa", pass_placeholder: "Contraseña...", enter_btn: "Entrar",
-                welcome_msg: "¡Bienvenido! ¿Cómo podemos ayudar?", room_placeholder: "Número de Habitación *", phone_placeholder: "Teléfono (Opcional)", select_default: "Seleccione lo que necesita...", opt_beach: "🏖️ Reserva de Playa", opt_service: "🛏️ Servicio de Habitaciones", opt_maint: "🛠️ Mantenimiento", opt_idea: "💡 Sugerencia / Elogio", opt_complain: "📢 Queja", desc_placeholder: "¿Alguna observación extra?", send_btn: "Enviar Solicitud", back_btn: "Volver", beach_select_items: "Seleccione los artículos:", beach_chair: "Silla de Playa", beach_cooler: "Hielera / Cooler", beach_towel: "Toalla de Playa"
+                welcome_msg: "¡Bienvenido! ¿Cómo podemos ayudar?", room_placeholder: "Número de Habitación *", phone_placeholder: "Teléfono (Opcional)", select_default: "Seleccione lo que necesita...", 
+                opt_beach: "🏖️ Alquiler Silla, Toalla, Hielera",
+                opt_sunset: "🥂 Puesta de Sol con Espumoso",
+                opt_service: "🛏️ Servicio de Habitaciones", opt_maint: "🛠️ Mantenimiento", opt_idea: "💡 Sugerencia / Elogio", opt_complain: "📢 Queja", desc_placeholder: "¿Alguna observación extra?", send_btn: "Enviar Solicitud", back_btn: "Volver", 
+                beach_select_items: "Seleccione los artículos:", beach_chair: "Silla de Playa", beach_cooler: "Hielera / Cooler", beach_towel: "Toalla de Playa"
             }
         };
 
-        // --- IDIOMAS ---
         window.mudarIdioma = function(lang) {
             currentLang = lang;
             document.querySelectorAll('.lang-btn').forEach(el => el.classList.remove('active'));
@@ -276,8 +318,7 @@
             });
         }
 
-        // --- INICIALIZAÇÃO ---
-        window.onload = function() {
+        function verificarRedirecionamento() {
             const params = new URLSearchParams(window.location.search);
             const hotelParam = params.get('hotel');
             if (hotelParam) {
@@ -285,9 +326,9 @@
                 else if(hotelParam === 'porto') mostrarAreaHospede('Porto Salvador', true);
                 else if(hotelParam === 'ancoras') mostrarAreaHospede('Porto das Ancoras', true);
             }
-        };
+        }
+        verificarRedirecionamento();
 
-        // --- NAVEGAÇÃO ---
         window.fazerLogin = function() {
             const senha = document.getElementById('senhaInput').value;
             if (senha === "master") {
@@ -311,22 +352,44 @@
             else logoImg.src = "logo_ancoras.png";
 
             const optionPraia = document.getElementById('opt-praia');
-            if(hotel === 'Porto das Ancoras') { optionPraia.hidden = true; optionPraia.disabled = true; } 
-            else { optionPraia.hidden = false; optionPraia.disabled = false; }
+            const optionSunset = document.getElementById('opt-sunset');
+            if(hotel === 'Porto das Ancoras') { 
+                optionPraia.hidden = true; optionPraia.disabled = true; 
+                optionSunset.hidden = true; optionSunset.disabled = true; 
+            } else { 
+                optionPraia.hidden = false; optionPraia.disabled = false;
+                optionSunset.hidden = false; optionSunset.disabled = false; 
+            }
 
             if(veioDoQR) document.getElementById('btn-voltar').classList.add('hidden'); 
             else document.getElementById('btn-voltar').classList.remove('hidden');
         }
 
-        window.verificarOpcaoPraia = function() {
+        window.verificarOpcao = function() {
             const select = document.getElementById('tipo');
             const areaPraia = document.getElementById('area-kit-praia');
-            if (select.value === 'Praia') areaPraia.classList.remove('hidden');
-            else { 
-                areaPraia.classList.add('hidden'); 
-                document.getElementById('check-cadeira').checked = false;
-                document.getElementById('check-cooler').checked = false;
-                document.getElementById('check-toalha').checked = false;
+            const areaSunset = document.getElementById('area-sunset');
+
+            areaPraia.classList.add('hidden');
+            areaSunset.classList.add('hidden');
+
+            if (select.value === 'Praia') {
+                areaPraia.classList.remove('hidden');
+            } else if (select.value === 'Sunset') {
+                areaSunset.classList.remove('hidden');
+            }
+        }
+
+        window.toggleInput = function(checkboxId, inputId) {
+            const checkbox = document.getElementById(checkboxId);
+            const input = document.getElementById(inputId);
+            
+            if (checkbox.checked) {
+                input.style.display = 'block';
+                input.focus(); 
+            } else {
+                input.style.display = 'none';
+                input.value = ''; 
             }
         }
 
@@ -334,84 +397,42 @@
             hotelAtual = hotel;
             document.getElementById('tela-login').classList.add('hidden');
             document.getElementById('tela-admin').classList.remove('hidden');
-            
-            if(isMaster) {
-                document.getElementById('titulo-painel').innerText = "Painel Master";
-            } else {
-                document.getElementById('titulo-painel').innerText = "Operacional: " + hotel;
-                document.getElementById('controle-master').classList.add('hidden');
-            }
+            if(isMaster) { document.getElementById('titulo-painel').innerText = "Painel Master"; } 
+            else { document.getElementById('titulo-painel').innerText = "Operacional: " + hotel; document.getElementById('controle-master').classList.add('hidden'); }
             carregarDados(hotel);
         }
 
         window.alterarFiltroMaster = function() {
             const novoFiltro = document.getElementById('filtro-master-select').value;
             carregarDados(novoFiltro);
-            
-            // Esconde comparativo se não for TODOS
-            const divComp = document.getElementById('div-comparativo');
-            if(novoFiltro !== 'TODOS') divComp.classList.add('hidden');
-            else divComp.classList.remove('hidden');
         }
 
-        // --- LÓGICA PRINCIPAL DE DADOS ---
         function carregarDados(filtro) {
             const lista = document.getElementById('lista-chamados');
             lista.innerHTML = "<p style='text-align:center'>Atualizando...</p>";
 
             let q;
-            if (filtro === "TODOS") {
-                q = query(collection(db, "chamados"), orderBy("data", "desc"));
-            } else {
-                q = query(collection(db, "chamados"), where("hotel", "==", filtro), orderBy("data", "desc"));
-            }
+            if (filtro === "TODOS") q = query(collection(db, "chamados"), orderBy("data", "desc"));
+            else q = query(collection(db, "chamados"), where("hotel", "==", filtro), orderBy("data", "desc"));
 
             onSnapshot(q, (querySnapshot) => {
                 lista.innerHTML = "";
-                
-                // Variáveis para Relatórios
                 let totalMes = 0;
                 let pendentesAgora = 0;
-                let temposResolucao = []; // Array para guardar minutos de resolução
-                let tipos = { "Manutenção": 0, "Serviço": 0, "Sugestão": 0, "Reclamação": 0, "Praia": 0 };
-                let statsHoteis = {}; // Para comparar hotéis
-
                 const mesAtual = new Date().getMonth();
 
                 if(querySnapshot.empty) {
                     lista.innerHTML = "<p style='text-align:center'>Nenhum registro.</p>";
-                    if(isMaster) atualizarKPIs(0, 0, "--", {});
+                    if(isMaster) atualizarKPIs(0, 0);
                     return;
                 }
 
                 querySnapshot.forEach((docSnap) => {
                     const chamado = docSnap.data();
-                    
-                    // 1. Contagem Pendentes
                     if(chamado.status !== 'resolvido') pendentesAgora++;
-
-                    // 2. Contagem Mês Atual
                     const dataChamado = chamado.data ? new Date(chamado.data.seconds * 1000) : new Date();
                     if(dataChamado.getMonth() === mesAtual) totalMes++;
 
-                    // 3. Calculo de Tempo (Se tiver dataResolucao e data)
-                    if(chamado.status === 'resolvido' && chamado.dataResolucao && chamado.data) {
-                        const inicio = chamado.data.seconds;
-                        const fim = chamado.dataResolucao.seconds;
-                        const diffMinutos = (fim - inicio) / 60;
-                        temposResolucao.push(diffMinutos);
-                    }
-
-                    // 4. Tipos e Stats por Hotel
-                    if(tipos[chamado.tipo] !== undefined) tipos[chamado.tipo]++;
-                    else tipos[chamado.tipo] = 1;
-
-                    // Stats individuais por Hotel (para tabela comparativa)
-                    if(!statsHoteis[chamado.hotel]) statsHoteis[chamado.hotel] = { vol: 0, pend: 0 };
-                    if(dataChamado.getMonth() === mesAtual) statsHoteis[chamado.hotel].vol++;
-                    if(chamado.status !== 'resolvido') statsHoteis[chamado.hotel].pend++;
-
-                    // RENDERIZAÇÃO DA LISTA (Funcionários só veem pendentes/andamento)
                     if (isMaster || chamado.status !== 'resolvido') {
                         const div = document.createElement('div');
                         let borderClass = 'status-pendente';
@@ -421,6 +442,9 @@
                         div.className = `ticket-card ${borderClass}`;
                         const hora = dataChamado.toLocaleDateString('pt-BR', {day:'2-digit', month:'2-digit', hour: '2-digit', minute:'2-digit'});
                         const telefoneInfo = chamado.telefone ? ` | 📞 ${chamado.telefone}` : '';
+                        
+                        let tagTipo = `<span class="tag">${chamado.tipo}</span>`;
+                        if(chamado.tipo === 'Sunset') tagTipo = `<span class="tag tag-sunset">🌅 SUNSET</span>`;
 
                         div.innerHTML = `
                             <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:#888;">
@@ -428,9 +452,11 @@
                                 <span class="tag tag-hotel">${chamado.hotel}</span>
                             </div>
                             <div style="margin-top:5px;">
-                                <strong>Quarto ${chamado.quarto}${telefoneInfo}</strong> <span class="tag">${chamado.tipo}</span>
+                                <strong>Quarto ${chamado.quarto}${telefoneInfo}</strong> ${tagTipo}
                             </div>
                             <p style="font-size:0.9rem; color:#555; margin: 8px 0;">${chamado.descricao}</p>
+                            ${chamado.dataReserva ? `<div style="font-size:0.8rem; color:#e65100; margin-bottom:5px;">📅 Reserva para: <b>${chamado.dataReserva}</b></div>` : ''}
+                            
                             <div style="display:flex; gap:10px;">
                                 ${chamado.status === 'pendente' ? `<button class="btn-sm btn-hotel" style="border-color:#f1c40f;" onclick="mudarStatus('${docSnap.id}', 'andamento')">Assumir</button>` : ''}
                                 ${chamado.status !== 'resolvido' ? `<button class="btn-sm btn-success" onclick="mudarStatus('${docSnap.id}', 'resolvido')">Resolver</button>` : `<span style="color:green; font-size:0.8rem;">✔ Resolvido</span>`}
@@ -440,92 +466,89 @@
                     }
                 });
 
-                // Calcular Média de Tempo
-                let tempoMedioStr = "--";
-                if(temposResolucao.length > 0) {
-                    const soma = temposResolucao.reduce((a, b) => a + b, 0);
-                    const media = Math.round(soma / temposResolucao.length);
-                    tempoMedioStr = media < 60 ? `${media} min` : `${(media/60).toFixed(1)} h`;
-                }
-
-                if(isMaster) {
-                    atualizarKPIs(pendentesAgora, totalMes, tempoMedioStr, tipos, statsHoteis);
-                }
+                if(isMaster) atualizarKPIs(pendentesAgora, totalMes);
             });
         }
 
-        function atualizarKPIs(pendentes, mes, tempo, tiposObj, statsHoteis) {
+        function atualizarKPIs(pendentes, mes) {
             document.getElementById('stat-pendente').innerText = pendentes;
             document.getElementById('stat-mes').innerText = mes;
-            document.getElementById('stat-tempo').innerText = tempo;
-
-            // Gráfico de Barras
-            const container = document.getElementById('barras-relatorio');
-            container.innerHTML = "";
-            let maxVal = Math.max(...Object.values(tiposObj));
-            if(maxVal === 0) maxVal = 1; // Evitar divisao por zero
-
-            for (const [tipo, qtd] of Object.entries(tiposObj)) {
-                if (qtd > 0) {
-                    const porcentagem = (qtd / maxVal) * 100; // Relativo ao maior valor
-                    const div = document.createElement('div');
-                    div.className = 'bar-row';
-                    div.innerHTML = `
-                        <div class="bar-label"><span>${tipo}</span><strong>${qtd}</strong></div>
-                        <div class="bar-track"><div class="bar-fill" style="width: ${porcentagem}%;"></div></div>
-                    `;
-                    container.appendChild(div);
-                }
-            }
-
-            // Tabela Comparativa
-            const tbody = document.getElementById('tabela-comparativa');
-            tbody.innerHTML = "";
-            for (const [hotel, dados] of Object.entries(statsHoteis)) {
-                tbody.innerHTML += `<tr><td>${hotel}</td><td>${dados.vol}</td><td>${dados.pend}</td></tr>`;
-            }
         }
 
-        // --- ENVIAR ---
         window.enviarChamado = async function() {
             const quarto = document.getElementById('quarto').value;
             const telefone = document.getElementById('telefone').value;
             const tipo = document.getElementById('tipo').value;
             let desc = document.getElementById('descricao').value;
-            
+            let dataReserva = null;
+
             if (tipo === 'Praia') {
                 const itens = [];
-                if(document.getElementById('check-cadeira').checked) itens.push("Cadeira");
-                if(document.getElementById('check-cooler').checked) itens.push("Cooler");
-                if(document.getElementById('check-toalha').checked) itens.push("Toalha");
-                
+                if(document.getElementById('check-cadeira').checked) {
+                    const qtd = document.getElementById('qtd-cadeira').value;
+                    if(!qtd) return alert("Informe a quantidade de cadeiras.");
+                    itens.push(`Cadeira (${qtd})`);
+                }
+                if(document.getElementById('check-toalha').checked) {
+                    const qtd = document.getElementById('qtd-toalha').value;
+                    if(!qtd) return alert("Informe a quantidade de toalhas.");
+                    itens.push(`Toalha (${qtd})`);
+                }
+                if(document.getElementById('check-cooler').checked) {
+                    const detalhe = document.getElementById('detalhe-cooler').value;
+                    if(!detalhe) return alert("Informe o que deseja no cooler.");
+                    itens.push(`Cooler [${detalhe}]`);
+                }
+
                 if (itens.length === 0) return alert("Selecione pelo menos um item.");
-                desc = `[ITENS RESERVADOS: ${itens.join(', ')}] \nObs: ` + desc;
+                desc = `[ALUGUEL: ${itens.join(', ')}] \nObs: ` + desc;
+            }
+
+            if (tipo === 'Sunset') {
+                dataReserva = document.getElementById('data-sunset').value;
+                if(!dataReserva) return alert("Escolha a data da reserva.");
+
+                const q = query(collection(db, "chamados"), 
+                    where("tipo", "==", "Sunset"), 
+                    where("hotel", "==", hotelAtual),
+                    where("dataReserva", "==", dataReserva)
+                );
+                
+                const querySnapshot = await getDocs(q);
+                if(querySnapshot.size >= 5) {
+                    alert(`Desculpe! O dia ${dataReserva} já está lotado.`);
+                    return; 
+                }
+                desc = `[SUNSET ESPUMANTE] Data: ${dataReserva} | R$ 120,00 \nObs: ` + desc;
             }
 
             if(!quarto || !tipo) return alert("Preencha o quarto e o tipo.");
 
             try {
+                const btn = document.querySelector('.btn-success');
+                btn.disabled = true;
+                btn.innerText = "Enviando...";
+
                 await addDoc(collection(db, "chamados"), {
                     hotel: hotelAtual, quarto: quarto, telefone: telefone, tipo: tipo, descricao: desc, 
                     status: "pendente", 
-                    data: serverTimestamp() // Usa hora do servidor para precisão
+                    dataReserva: dataReserva, 
+                    data: serverTimestamp()
                 });
-                alert("Enviado com sucesso!");
+                
+                alert("Solicitação enviada com sucesso!");
                 location.reload(); 
-            } catch (e) { console.error(e); alert("Erro ao enviar."); }
+            } catch (e) { 
+                console.error(e); 
+                alert("Erro ao enviar.");
+                document.querySelector('.btn-success').disabled = false;
+            }
         }
 
-        // --- MUDAR STATUS (Com gravação de tempo) ---
         window.mudarStatus = async function(id, novoStatus) {
             const chamadoRef = doc(db, "chamados", id);
             let updateData = { status: novoStatus };
-            
-            // Se estiver resolvendo, grava a hora final
-            if(novoStatus === 'resolvido') {
-                updateData.dataResolucao = serverTimestamp();
-            }
-
+            if(novoStatus === 'resolvido') updateData.dataResolucao = serverTimestamp();
             await updateDoc(chamadoRef, updateData);
         }
     </script>
