@@ -4,25 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guest Service System</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     
     <style>
         /* --- ESTILO GERAL --- */
         :root {
             --primary: #0056b3; 
-            --accent: #00a8cc;
-            --bg: #f4f7f6;
+            --bg: #eef2f5; /* Fundo mais escuro para contraste */
             --card-bg: #ffffff;
             --text: #333;
-            --danger: #e74c3c;
-            --warning: #f1c40f;
-            --success: #2ecc71;
+            --danger: #d32f2f; 
+            --warning: #f57f17;
+            --success: #2e7d32;
         }
 
         body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 20px; display: flex; justify-content: center; min-height: 100vh; }
-        .container { width: 100%; max-width: 800px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; }
+        .container { width: 100%; max-width: 1600px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; }
         
-        .app-card { width: 100%; max-width: 500px; background: var(--card-bg); padding: 30px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; margin-top: 20px; transition: all 0.3s ease; position: relative;}
+        .app-card { width: 100%; max-width: 500px; background: var(--card-bg); padding: 30px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; margin-top: 20px; position: relative;}
         .hidden { display: none !important; }
         
         /* --- HEADER E LOGOS --- */
@@ -33,58 +32,99 @@
 
         /* --- IDIOMAS --- */
         .lang-options { display: flex; gap: 10px; font-size: 0.9rem; }
-        .lang-btn { cursor: pointer; font-weight: 700; opacity: 0.3; transition: opacity 0.2s; text-decoration: none; }
+        .lang-btn { cursor: pointer; font-weight: 700; opacity: 0.3; transition: opacity 0.2s; text-decoration: none; color: #333; }
         .lang-btn:hover, .lang-btn.active { opacity: 1; text-decoration: underline; }
-        .color-br { color: #000000; }
-        .color-us { color: #0056b3; }
-        .color-es { color: #e74c3c; }
+        .color-br.active { color: #000; }
+        .color-us.active { color: #0056b3; }
+        .color-es.active { color: #e74c3c; }
 
         /* Botões e Inputs */
         .btn { width: 100%; padding: 15px; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; margin-bottom: 12px; transition: 0.2s; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
-        .btn-hotel { background: white; border: 2px solid #e0e0e0; color: #444; }
+        .btn-hotel { background: white; border: 2px solid #ccc; color: #444; }
         .btn-hotel:hover { border-color: var(--primary); color: var(--primary); background: #f8fbff; }
-        .btn-primary { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; }
+        .btn-primary { background: linear-gradient(135deg, var(--primary), #00a8cc); color: white; }
         .btn-success { background: var(--success); color: white; }
         .btn-sm { padding: 8px 15px; width: auto; font-size: 0.9rem; }
-        input[type="text"], input[type="password"], input[type="date"], select, textarea { width: 100%; padding: 14px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 10px; background: #fafafa; box-sizing: border-box; font-family: inherit; font-size: 1rem;}
+        input, select, textarea { width: 100%; padding: 14px; margin-bottom: 15px; border: 1px solid #999; border-radius: 8px; background: #fff; box-sizing: border-box; font-family: inherit; font-size: 1rem; color: #000;}
         .input-row { display: flex; gap: 10px; }
         .input-row input { flex: 1; }
-        .required-field::after { content: " *"; color: var(--danger); }
 
-        /* --- KIT PRAIA (LAYOUT AJUSTADO) --- */
-        .beach-kit-container { background: #e3f2fd; border: 1px solid #90caf9; padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: left; animation: slideDown 0.3s ease-out; }
-        
+        /* --- KIT PRAIA --- */
+        .beach-kit-container { background: #e3f2fd; border: 2px solid #90caf9; padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: left; }
         .checkbox-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; height: 40px; }
-        .checkbox-label { display: flex; align-items: center; gap: 10px; font-size: 0.95rem; cursor: pointer; width: 150px; }
+        .checkbox-label { display: flex; align-items: center; gap: 10px; font-size: 0.95rem; cursor: pointer; width: 150px; font-weight: bold; color: #333; }
         input[type="checkbox"] { transform: scale(1.3); margin: 0; cursor: pointer; }
-        
-        /* Inputs que aparecem ao lado */
-        .dynamic-input { flex: 1; margin-bottom: 0 !important; padding: 8px !important; height: 38px; display: none; font-size: 0.9rem !important; }
+        .dynamic-input { flex: 1; margin-bottom: 0 !important; padding: 8px !important; height: 38px; display: none; font-size: 0.9rem !important; border: 2px solid var(--primary); }
 
-        /* --- PÔR DO SOL (SUNSET) --- */
-        .sunset-container { background: #fff3e0; border: 1px solid #ffb74d; padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: center; animation: slideDown 0.3s ease-out; }
+        /* --- PÔR DO SOL --- */
+        .sunset-container { background: #fff3e0; border: 2px solid #ffb74d; padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: center; }
         .sunset-img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
         .price-tag { background: #2ecc71; color: white; padding: 5px 10px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; margin-bottom: 10px; display: inline-block;}
         .time-info { font-size: 0.9rem; color: #666; margin-bottom: 10px; display: block; }
 
-        /* --- DASHBOARD MASTER --- */
-        .dashboard-container { width: 100%; max-width: 800px; margin-top: 20px; }
-        .dashboard-card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 20px; }
-        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 20px; }
-        .kpi-box { background: #f8f9fa; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #eee; }
-        .kpi-value { font-size: 1.8rem; font-weight: 800; color: var(--primary); display: block; }
-        .kpi-label { font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 5px; }
-
-        /* Tickets */
-        .ticket-card { background: white; padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 5px solid #ccc; text-align: left; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .status-pendente { border-left-color: var(--danger); }
-        .status-andamento { border-left-color: var(--warning); }
-        .status-resolvido { border-left-color: var(--success); opacity: 0.7; }
-        .tag { font-size: 0.75rem; padding: 3px 8px; border-radius: 4px; background: #eee; font-weight: 600; }
-        .tag-hotel { background: #e3f2fd; color: #0d47a1; }
-        .tag-sunset { background: #ffcc80; color: #e65100; }
+        /* --- DASHBOARD MASTER (QUADRO KANBAN) --- */
+        .dashboard-container { width: 100%; margin-top: 10px; padding: 0 10px; }
         
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .board-grid { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 20px; 
+            align-items: start; 
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .board-column { 
+            background: #ffffff; 
+            padding: 10px; 
+            border-radius: 8px; 
+            width: 300px; /* Largura fixa para ficar organizado */
+            flex-grow: 1;
+            max-width: 350px;
+            border-top: 5px solid #ccc; /* Cor padrão do topo */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: flex; flex-direction: column; gap: 10px;
+            min-height: 150px;
+        }
+        
+        .board-header { 
+            font-weight: 900; color: #222; text-transform: uppercase; font-size: 0.85rem; 
+            display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; border-bottom: 1px solid #eee;
+        }
+        
+        /* ESTILO DOS CARTÕES (CARDS) - ALTO CONTRASTE */
+        .ticket-card { 
+            background: white; 
+            padding: 12px; 
+            border-radius: 6px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15); 
+            text-align: left; 
+            border: 1px solid #ddd;
+            display: flex; flex-direction: column; gap: 8px;
+        }
+        
+        .card-top { display: flex; justify-content: space-between; align-items: center; }
+        .card-time { background: #333; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
+        .card-room { font-size: 1.1rem; font-weight: 800; color: #000; background: #e3f2fd; padding: 2px 8px; border-radius: 4px; border: 1px solid #90caf9;}
+        
+        .card-desc { font-size: 0.95rem; color: #000; font-weight: 600; line-height: 1.3; }
+        .card-obs { font-size: 0.85rem; color: #555; font-style: italic; background: #f5f5f5; padding: 4px; border-radius: 4px; }
+
+        /* STATUS VISUAL */
+        /* Pendente (Vermelho) */
+        .status-red { border-left: 8px solid var(--danger); background-color: #fff8f8; }
+        .btn-start { width: 100%; padding: 8px; background: #fff3e0; border: 1px solid #ffcc80; color: #e65100; font-weight: bold; cursor: pointer; border-radius: 4px; }
+        .btn-start:hover { background: #ffe0b2; }
+
+        /* Em Andamento (Amarelo) */
+        .status-yellow { border-left: 8px solid var(--warning); background-color: #fffdf0; }
+        .btn-resolve { width: 100%; padding: 8px; background: #e8f5e9; border: 1px solid #a5d6a7; color: #2e7d32; font-weight: bold; cursor: pointer; border-radius: 4px; }
+        .btn-resolve:hover { background: #c8e6c9; }
+
+        .tag-count { background: #000; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem; }
+        
+        /* Botão Filtro */
+        #card-filtro { background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; width: 100%; max-width: 600px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
     </style>
 </head>
 <body>
@@ -102,19 +142,15 @@
             </div>
 
             <h1 data-key="login_title">Acesso ao Sistema</h1>
-            <p data-key="login_subtitle">Selecione uma opção abaixo:</p>
             
             <button onclick="mostrarAreaHospede('Hit Hotel')" class="btn btn-hotel">
-                <img src="logo_hit.png" alt="Hit Hotel" class="btn-logo"> 
-                <div><span data-key="guest">Hóspede</span> <b>Hit Hotel</b></div>
+                <img src="logo_hit.png" alt="Hit Hotel" class="btn-logo"> <b>Hit Hotel</b>
             </button>
             <button onclick="mostrarAreaHospede('Porto Salvador')" class="btn btn-hotel">
-                <img src="logo_porto.png" alt="Porto Salvador" class="btn-logo">
-                <div><span data-key="guest">Hóspede</span> <b>Porto Salvador</b></div>
+                <img src="logo_porto.png" alt="Porto Salvador" class="btn-logo"> <b>Porto Salvador</b>
             </button>
             <button onclick="mostrarAreaHospede('Porto das Ancoras')" class="btn btn-hotel">
-                <img src="logo_ancoras.png" alt="Porto das Ancoras" class="btn-logo">
-                <div><span data-key="guest">Hóspede</span> <b>Porto das Âncoras</b></div>
+                <img src="logo_ancoras.png" alt="Porto das Ancoras" class="btn-logo"> <b>Porto das Âncoras</b>
             </button>
 
             <div style="border-top: 1px solid #eee; margin: 20px 0;"></div>
@@ -145,40 +181,27 @@
             
             <select id="tipo" onchange="verificarOpcao()">
                 <option value="" disabled selected data-key="select_default">Selecione o que precisa...</option>
+                <option value="Recepção" data-key="opt_service">🗣️ Fale com a Recepção</option>
+                <option value="Manutenção" data-key="opt_maint">🛠️ Manutenção</option>
                 <option value="Praia" id="opt-praia" data-key="opt_beach">🏖️ Aluguel Cadeira, Toalha, Cooler</option>
                 <option value="Sunset" id="opt-sunset" data-key="opt_sunset">🥂 Pôr do Sol com Espumante</option>
-
-                <option value="Serviço" data-key="opt_service">🛏️ Serviço de Quarto</option>
-                <option value="Manutenção" data-key="opt_maint">🛠️ Manutenção</option>
                 <option value="Sugestão" data-key="opt_idea">💡 Sugestão / Elogio</option>
                 <option value="Reclamação" data-key="opt_complain">📢 Reclamação</option>
             </select>
 
             <div id="area-kit-praia" class="beach-kit-container hidden">
                 <strong style="color:#0056b3; display:block; margin-bottom:10px;" data-key="beach_select_items">Selecione os itens:</strong>
-                
                 <div class="checkbox-row">
-                    <label class="checkbox-label">
-                        <input type="checkbox" id="check-cadeira" onchange="toggleInput('check-cadeira', 'qtd-cadeira')"> 
-                        <span data-key="beach_chair">Cadeira de Praia</span>
-                    </label>
-                    <input type="number" id="qtd-cadeira" class="dynamic-input" min="1" placeholder="Quantidade">
+                    <label class="checkbox-label"><input type="checkbox" id="check-cadeira" onchange="toggleInput('check-cadeira', 'qtd-cadeira')"> <span data-key="beach_chair">Cadeira</span></label>
+                    <input type="number" id="qtd-cadeira" class="dynamic-input" min="1" placeholder="Qtd">
                 </div>
-
                 <div class="checkbox-row">
-                    <label class="checkbox-label">
-                        <input type="checkbox" id="check-toalha" onchange="toggleInput('check-toalha', 'qtd-toalha')"> 
-                        <span data-key="beach_towel">Toalha de Praia</span>
-                    </label>
-                    <input type="number" id="qtd-toalha" class="dynamic-input" min="1" placeholder="Quantidade">
+                    <label class="checkbox-label"><input type="checkbox" id="check-toalha" onchange="toggleInput('check-toalha', 'qtd-toalha')"> <span data-key="beach_towel">Toalha</span></label>
+                    <input type="number" id="qtd-toalha" class="dynamic-input" min="1" placeholder="Qtd">
                 </div>
-
                 <div class="checkbox-row">
-                    <label class="checkbox-label">
-                        <input type="checkbox" id="check-cooler" onchange="toggleInput('check-cooler', 'detalhe-cooler')"> 
-                        <span data-key="beach_cooler">Cooler</span>
-                    </label>
-                    <input type="text" id="detalhe-cooler" class="dynamic-input" placeholder="Cerveja, água, refrigerante...">
+                    <label class="checkbox-label"><input type="checkbox" id="check-cooler" onchange="toggleInput('check-cooler', 'detalhe-cooler')"> <span data-key="beach_cooler">Cooler</span></label>
+                    <input type="text" id="detalhe-cooler" class="dynamic-input" placeholder="O que deseja?">
                 </div>
             </div>
 
@@ -189,7 +212,6 @@
                 <span class="time-info">⏰ 16:30 - 18:30</span>
                 <label style="display:block; margin-top:10px; font-weight:bold;">Escolha a Data:</label>
                 <input type="date" id="data-sunset" style="margin-top:5px;">
-                <p style="font-size:0.8rem; color:#e65100;">* Máximo 5 reservas por dia.</p>
             </div>
 
             <textarea id="descricao" rows="4" placeholder="Descreva o pedido..." data-ph="desc_placeholder"></textarea>
@@ -200,33 +222,23 @@
 
         <div id="tela-admin" class="hidden dashboard-container">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                <h3 id="titulo-painel" style="margin:0;">Painel</h3>
+                <h3 id="titulo-painel" style="margin:0; font-size:1.5rem;">Painel de Controle</h3>
                 <button onclick="location.href = window.location.pathname" class="btn btn-sm btn-hotel">Sair</button>
             </div>
 
-            <div id="controle-master" class="dashboard-card hidden">
-                <label style="font-weight: bold; font-size: 0.9rem;">📊 Filtrar Visão:</label>
-                <select id="filtro-master-select" onchange="alterarFiltroMaster()" style="margin-top: 5px; padding: 10px;">
+            <div id="card-filtro">
+                <label style="font-weight: bold;">📊 Visualizar:</label>
+                <select id="filtro-master-select" onchange="alterarFiltroMaster()" style="width: 100%; margin-top:5px; border: 2px solid var(--primary);">
                     <option value="TODOS">🏢 Todos os 3 Hotéis</option>
                     <option value="Hit Hotel">🌊 Hit Hotel</option>
                     <option value="Porto Salvador">⚓ Porto Salvador</option>
                     <option value="Porto das Ancoras">⛵ Porto das Âncoras</option>
                 </select>
-
-                <div class="kpi-grid" style="margin-top:20px;">
-                    <div class="kpi-box">
-                        <span class="kpi-value" id="stat-pendente" style="color: var(--danger)">0</span>
-                        <span class="kpi-label">Pendentes</span>
-                    </div>
-                    <div class="kpi-box">
-                        <span class="kpi-value" id="stat-mes">0</span>
-                        <span class="kpi-label">Total Mês</span>
-                    </div>
-                </div>
             </div>
-            
-            <h4 style="color: #666; margin-bottom: 10px;">Fila de Atendimento</h4>
-            <div id="lista-chamados"><p style="text-align: center; color: #999;">Carregando...</p></div>
+
+            <div class="board-grid" id="quadro-demandas">
+                <p style="width:100%; text-align:center;">Carregando...</p>
+            </div>
         </div>
     </div>
 
@@ -235,7 +247,6 @@
         import { getFirestore, collection, addDoc, query, where, onSnapshot, updateDoc, doc, orderBy, serverTimestamp, getDocs } 
         from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
-        // CONFIGURAÇÃO FIREBASE
         const firebaseConfig = {
             apiKey: "AIzaSyAVgZLMVBJFqnOTKejx2fqs_4YhNWMXa-Y",
             authDomain: "sistema-hoteis-app.firebaseapp.com",
@@ -250,36 +261,15 @@
         
         let hotelAtual = ""; 
         let isMaster = false;
-        let currentLang = 'pt';
         
-        // TRADUÇÕES
+        // TRADUÇÕES E IDIOMAS (MANTIDOS)
         const translations = {
-            pt: {
-                login_title: "Acesso ao Sistema", login_subtitle: "Selecione uma opção abaixo:", guest: "Hóspede", admin_area: "Área Administrativa", pass_placeholder: "Senha...", enter_btn: "Entrar",
-                welcome_msg: "Bem-vindo! Como podemos ajudar?", room_placeholder: "Nº do Quarto *", phone_placeholder: "Telefone (Opcional)", select_default: "Selecione o que precisa...", 
-                opt_beach: "🏖️ Aluguel Cadeira, Toalha, Cooler", opt_sunset: "🥂 Pôr do Sol com Espumante", opt_service: "🛏️ Serviço de Quarto", opt_maint: "🛠️ Manutenção", opt_idea: "💡 Sugestão / Elogio", opt_complain: "📢 Reclamação", 
-                desc_placeholder: "Alguma observação extra?", send_btn: "Enviar Solicitação", back_btn: "Voltar", 
-                beach_select_items: "Selecione os itens:", beach_chair: "Cadeira de Praia", beach_cooler: "Cooler", beach_towel: "Toalha de Praia"
-            },
-            en: {
-                login_title: "System Access", login_subtitle: "Select an option below:", guest: "Guest", admin_area: "Staff Area", pass_placeholder: "Password...", enter_btn: "Login",
-                welcome_msg: "Welcome! How can we help?", room_placeholder: "Room Number *", phone_placeholder: "Phone (Optional)", select_default: "Select what you need...", 
-                opt_beach: "🏖️ Rent Beach Chair, Towel, Cooler", opt_sunset: "🥂 Sunset with Sparkling Wine", opt_service: "🛏️ Room Service", opt_maint: "🛠️ Maintenance", opt_idea: "💡 Suggestion / Compliment", opt_complain: "📢 Complaint", 
-                desc_placeholder: "Any extra comments?", send_btn: "Send Request", back_btn: "Back", 
-                beach_select_items: "Select items:", beach_chair: "Beach Chair", beach_cooler: "Cooler", beach_towel: "Beach Towel"
-            },
-            es: {
-                login_title: "Acceso al Sistema", login_subtitle: "Seleccione una opción:", guest: "Huésped", admin_area: "Área Administrativa", pass_placeholder: "Contraseña...", enter_btn: "Entrar",
-                welcome_msg: "¡Bienvenido! ¿Cómo podemos ayudar?", room_placeholder: "Número de Habitación *", phone_placeholder: "Teléfono (Opcional)", select_default: "Seleccione lo que necesita...", 
-                opt_beach: "🏖️ Alquiler Silla, Toalla, Hielera", opt_sunset: "🥂 Puesta de Sol con Espumoso", opt_service: "🛏️ Servicio de Habitaciones", opt_maint: "🛠️ Mantenimiento", opt_idea: "💡 Sugerencia / Elogio", opt_complain: "📢 Queja", 
-                desc_placeholder: "¿Alguna observación extra?", send_btn: "Enviar Solicitud", back_btn: "Volver", 
-                beach_select_items: "Seleccione los artículos:", beach_chair: "Silla de Playa", beach_cooler: "Hielera / Cooler", beach_towel: "Toalla de Playa"
-            }
+            pt: { login_title: "Acesso ao Sistema", guest: "Hóspede", admin_area: "Área Administrativa", pass_placeholder: "Senha...", enter_btn: "Entrar", welcome_msg: "Bem-vindo! Como podemos ajudar?", room_placeholder: "Nº do Quarto *", phone_placeholder: "Telefone (Opcional)", select_default: "Selecione o que precisa...", opt_beach: "🏖️ Aluguel Cadeira, Toalha, Cooler", opt_sunset: "🥂 Pôr do Sol com Espumante", opt_service: "🗣️ Fale com a Recepção", opt_maint: "🛠️ Manutenção", opt_idea: "💡 Sugestão / Elogio", opt_complain: "📢 Reclamação", desc_placeholder: "Alguma observação extra?", send_btn: "Enviar Solicitação", back_btn: "Voltar", beach_select_items: "Selecione os itens:", beach_chair: "Cadeira", beach_cooler: "Cooler", beach_towel: "Toalha" },
+            en: { login_title: "System Access", guest: "Guest", admin_area: "Staff Area", pass_placeholder: "Password...", enter_btn: "Login", welcome_msg: "Welcome! How can we help?", room_placeholder: "Room Number *", phone_placeholder: "Phone (Optional)", select_default: "Select what you need...", opt_beach: "🏖️ Rent Beach Chair, Towel, Cooler", opt_sunset: "🥂 Sunset with Sparkling Wine", opt_service: "🗣️ Talk to Reception", opt_maint: "🛠️ Maintenance", opt_idea: "💡 Suggestion / Compliment", opt_complain: "📢 Complaint", desc_placeholder: "Any extra comments?", send_btn: "Send Request", back_btn: "Back", beach_select_items: "Select items:", beach_chair: "Beach Chair", beach_cooler: "Cooler", beach_towel: "Beach Towel" },
+            es: { login_title: "Acceso al Sistema", guest: "Huésped", admin_area: "Área Administrativa", pass_placeholder: "Contraseña...", enter_btn: "Entrar", welcome_msg: "¡Bienvenido! ¿Cómo podemos ayudar?", room_placeholder: "Número de Habitación *", phone_placeholder: "Teléfono (Opcional)", select_default: "Seleccione lo que necesita...", opt_beach: "🏖️ Alquiler Silla, Toalla, Hielera", opt_sunset: "🥂 Puesta de Sol con Espumoso", opt_service: "🗣️ Hable con Recepción", opt_maint: "🛠️ Mantenimiento", opt_idea: "💡 Sugerencia / Elogio", opt_complain: "📢 Queja", desc_placeholder: "¿Alguna observación extra?", send_btn: "Enviar Solicitud", back_btn: "Volver", beach_select_items: "Seleccione los artículos:", beach_chair: "Silla de Playa", beach_cooler: "Hielera / Cooler", beach_towel: "Toalla de Playa" }
         };
 
-        // --- FUNÇÕES GLOBAIS ---
         window.mudarIdioma = function(lang) {
-            currentLang = lang;
             document.querySelectorAll('.lang-btn').forEach(el => el.classList.remove('active'));
             const seletores = { 'pt': '.color-br', 'en': '.color-us', 'es': '.color-es' };
             document.querySelectorAll(seletores[lang]).forEach(el => el.classList.add('active'));
@@ -293,16 +283,14 @@
             });
         }
 
+        // --- SISTEMA DE LOGIN E NAVEGAÇÃO ---
         window.fazerLogin = function() {
             const senha = document.getElementById('senhaInput').value;
-            if (senha === "master") {
-                isMaster = true;
-                document.getElementById('controle-master').classList.remove('hidden');
-                entrarPainel("TODOS"); 
-            } else if (senha === "hotel1") { entrarPainel("Hit Hotel"); }
-              else if (senha === "hotel2") { entrarPainel("Porto Salvador"); }
-              else if (senha === "hotel3") { entrarPainel("Porto das Ancoras"); }
-              else { alert("Senha inválida!"); }
+            if (senha === "master") { isMaster = true; document.getElementById('card-filtro').classList.remove('hidden'); entrarPainel("TODOS"); }
+            else if (senha === "hotel1") { entrarPainel("Hit Hotel"); }
+            else if (senha === "hotel2") { entrarPainel("Porto Salvador"); }
+            else if (senha === "hotel3") { entrarPainel("Porto das Ancoras"); }
+            else { alert("Senha inválida!"); }
         }
 
         window.mostrarAreaHospede = function(hotel, veioDoQR = false) {
@@ -317,13 +305,8 @@
 
             const optionPraia = document.getElementById('opt-praia');
             const optionSunset = document.getElementById('opt-sunset');
-            if(hotel === 'Porto das Ancoras') { 
-                optionPraia.hidden = true; optionPraia.disabled = true; 
-                optionSunset.hidden = true; optionSunset.disabled = true; 
-            } else { 
-                optionPraia.hidden = false; optionPraia.disabled = false;
-                optionSunset.hidden = false; optionSunset.disabled = false; 
-            }
+            if(hotel === 'Porto das Ancoras') { optionPraia.hidden = true; optionPraia.disabled = true; optionSunset.hidden = true; optionSunset.disabled = true; } 
+            else { optionPraia.hidden = false; optionPraia.disabled = false; optionSunset.hidden = false; optionSunset.disabled = false; }
 
             if(veioDoQR) document.getElementById('btn-voltar').classList.add('hidden'); 
             else document.getElementById('btn-voltar').classList.remove('hidden');
@@ -331,38 +314,25 @@
 
         window.verificarOpcao = function() {
             const select = document.getElementById('tipo');
-            const areaPraia = document.getElementById('area-kit-praia');
-            const areaSunset = document.getElementById('area-sunset');
-
-            areaPraia.classList.add('hidden');
-            areaSunset.classList.add('hidden');
-
-            if (select.value === 'Praia') {
-                areaPraia.classList.remove('hidden');
-            } else if (select.value === 'Sunset') {
-                areaSunset.classList.remove('hidden');
-            }
+            document.getElementById('area-kit-praia').classList.add('hidden');
+            document.getElementById('area-sunset').classList.add('hidden');
+            if (select.value === 'Praia') document.getElementById('area-kit-praia').classList.remove('hidden');
+            else if (select.value === 'Sunset') document.getElementById('area-sunset').classList.remove('hidden');
         }
 
         window.toggleInput = function(checkboxId, inputId) {
             const checkbox = document.getElementById(checkboxId);
             const input = document.getElementById(inputId);
-            
-            if (checkbox.checked) {
-                input.style.display = 'block';
-                input.focus(); 
-            } else {
-                input.style.display = 'none';
-                input.value = ''; 
-            }
+            if (checkbox.checked) { input.style.display = 'block'; input.focus(); } 
+            else { input.style.display = 'none'; input.value = ''; }
         }
 
         window.entrarPainel = function(hotel) {
             hotelAtual = hotel;
             document.getElementById('tela-login').classList.add('hidden');
             document.getElementById('tela-admin').classList.remove('hidden');
-            if(isMaster) { document.getElementById('titulo-painel').innerText = "Painel Master"; } 
-            else { document.getElementById('titulo-painel').innerText = "Operacional: " + hotel; document.getElementById('controle-master').classList.add('hidden'); }
+            if(!isMaster) { document.getElementById('card-filtro').classList.add('hidden'); document.getElementById('titulo-painel').innerText = hotel; } 
+            else { document.getElementById('titulo-painel').innerText = "Painel Master"; }
             carregarDados(hotel);
         }
 
@@ -371,74 +341,105 @@
             carregarDados(novoFiltro);
         }
 
+        // --- QUADRO KANBAN DINÂMICO (CORRIGIDO) ---
         function carregarDados(filtro) {
-            const lista = document.getElementById('lista-chamados');
-            lista.innerHTML = "<p style='text-align:center'>Atualizando...</p>";
+            const containerBoard = document.getElementById('quadro-demandas');
+            containerBoard.innerHTML = "<p style='width:100%; text-align:center;'>Carregando...</p>";
 
             let q;
-            if (filtro === "TODOS") q = query(collection(db, "chamados"), orderBy("data", "desc"));
-            else q = query(collection(db, "chamados"), where("hotel", "==", filtro), orderBy("data", "desc"));
+            if (filtro === "TODOS") q = query(collection(db, "chamados"));
+            else q = query(collection(db, "chamados"), where("hotel", "==", filtro));
 
             onSnapshot(q, (querySnapshot) => {
-                lista.innerHTML = "";
-                let totalMes = 0;
-                let pendentesAgora = 0;
-                const mesAtual = new Date().getMonth();
+                containerBoard.innerHTML = "";
+                
+                // Mapeamento Inteligente: Agrupa nomes antigos e novos
+                const grupos = {
+                    "Recepção": [], "Manutenção": [], "Praia": [], "Sunset": [], "Sugestão": [], "Reclamação": []
+                };
 
-                if(querySnapshot.empty) {
-                    lista.innerHTML = "<p style='text-align:center'>Nenhum registro.</p>";
-                    if(isMaster) atualizarKPIs(0, 0);
+                let listaDocs = [];
+                querySnapshot.forEach((doc) => {
+                    listaDocs.push({ id: doc.id, ...doc.data() });
+                });
+
+                // Ordena: Mais antigo primeiro
+                listaDocs.sort((a, b) => (a.data?.seconds || 0) - (b.data?.seconds || 0));
+
+                let totalItens = 0;
+
+                listaDocs.forEach(chamado => {
+                    if (chamado.status === 'resolvido') return; // Não mostra resolvidos
+
+                    const cardHtml = criarCartaoHTML(chamado);
+                    totalItens++;
+                    
+                    // Lógica de Agrupamento "À prova de falhas" (Pega nomes antigos e novos)
+                    const tipo = chamado.tipo;
+                    if (tipo === 'Recepção' || tipo === 'Serviço') grupos['Recepção'].push(cardHtml);
+                    else if (tipo === 'Manutenção') grupos['Manutenção'].push(cardHtml);
+                    else if (tipo === 'Praia' || tipo.includes('Aluguel')) grupos['Praia'].push(cardHtml);
+                    else if (tipo === 'Sunset' || tipo.includes('Pôr do Sol')) grupos['Sunset'].push(cardHtml);
+                    else if (tipo === 'Sugestão') grupos['Sugestão'].push(cardHtml);
+                    else if (tipo === 'Reclamação') grupos['Reclamação'].push(cardHtml);
+                    else grupos['Recepção'].push(cardHtml); // Joga perdidos na recepção
+                });
+
+                if(totalItens === 0) {
+                    containerBoard.innerHTML = "<p style='width:100%; text-align:center; color:#666; margin-top:20px;'>Nenhuma demanda pendente.</p>";
                     return;
                 }
 
-                querySnapshot.forEach((docSnap) => {
-                    const chamado = docSnap.data();
-                    if(chamado.status !== 'resolvido') pendentesAgora++;
-                    const dataChamado = chamado.data ? new Date(chamado.data.seconds * 1000) : new Date();
-                    if(dataChamado.getMonth() === mesAtual) totalMes++;
+                // Renderiza APENAS colunas com conteúdo
+                for (const [nome, tickets] of Object.entries(grupos)) {
+                    if (tickets.length > 0) {
+                        const colDiv = document.createElement('div');
+                        colDiv.className = 'board-column';
+                        // Cor da borda do topo baseada no tipo
+                        if(nome === 'Manutenção') colDiv.style.borderTopColor = '#d32f2f';
+                        else if(nome === 'Recepção') colDiv.style.borderTopColor = '#1976d2';
+                        else colDiv.style.borderTopColor = '#fbc02d';
 
-                    if (isMaster || chamado.status !== 'resolvido') {
-                        const div = document.createElement('div');
-                        let borderClass = 'status-pendente';
-                        if(chamado.status === 'andamento') borderClass = 'status-andamento';
-                        if(chamado.status === 'resolvido') borderClass = 'status-resolvido';
-
-                        div.className = `ticket-card ${borderClass}`;
-                        const hora = dataChamado.toLocaleDateString('pt-BR', {day:'2-digit', month:'2-digit', hour: '2-digit', minute:'2-digit'});
-                        const telefoneInfo = chamado.telefone ? ` | 📞 ${chamado.telefone}` : '';
-                        
-                        let tagTipo = `<span class="tag">${chamado.tipo}</span>`;
-                        if(chamado.tipo === 'Sunset') tagTipo = `<span class="tag tag-sunset">🌅 SUNSET</span>`;
-
-                        div.innerHTML = `
-                            <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:#888;">
-                                <span>${hora}</span>
-                                <span class="tag tag-hotel">${chamado.hotel}</span>
+                        colDiv.innerHTML = `
+                            <div class="board-header">
+                                <span>${nome}</span> 
+                                <span class="tag-count">${tickets.length}</span>
                             </div>
-                            <div style="margin-top:5px;">
-                                <strong>Quarto ${chamado.quarto}${telefoneInfo}</strong> ${tagTipo}
-                            </div>
-                            <p style="font-size:0.9rem; color:#555; margin: 8px 0;">${chamado.descricao}</p>
-                            ${chamado.dataReserva ? `<div style="font-size:0.8rem; color:#e65100; margin-bottom:5px;">📅 Reserva para: <b>${chamado.dataReserva}</b></div>` : ''}
-                            
-                            <div style="display:flex; gap:10px;">
-                                ${chamado.status === 'pendente' ? `<button class="btn-sm btn-hotel" style="border-color:#f1c40f;" onclick="mudarStatus('${docSnap.id}', 'andamento')">Assumir</button>` : ''}
-                                ${chamado.status !== 'resolvido' ? `<button class="btn-sm btn-success" onclick="mudarStatus('${docSnap.id}', 'resolvido')">Resolver</button>` : `<span style="color:green; font-size:0.8rem;">✔ Resolvido</span>`}
-                            </div>
+                            ${tickets.join('')} 
                         `;
-                        lista.appendChild(div);
+                        containerBoard.appendChild(colDiv);
                     }
-                });
-
-                if(isMaster) atualizarKPIs(pendentesAgora, totalMes);
+                }
             });
         }
 
-        function atualizarKPIs(pendentes, mes) {
-            document.getElementById('stat-pendente').innerText = pendentes;
-            document.getElementById('stat-mes').innerText = mes;
+        function criarCartaoHTML(chamado) {
+            const dataChamado = chamado.data ? new Date(chamado.data.seconds * 1000) : new Date();
+            const hora = dataChamado.toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'});
+            
+            // Status Visual
+            let classStatus = 'status-red';
+            let btnHtml = `<button class="btn-start" onclick="mudarStatus('${chamado.id}', 'andamento')">🟡 Assumir</button>`;
+
+            if (chamado.status === 'andamento') {
+                classStatus = 'status-yellow';
+                btnHtml = `<button class="btn-resolve" onclick="mudarStatus('${chamado.id}', 'resolvido')">✅ Resolver</button>`;
+            }
+
+            return `
+            <div class="ticket-card ${classStatus}">
+                <div class="card-top">
+                    <span class="card-time">🕒 ${hora}</span>
+                    <span class="card-room">Quarto ${chamado.quarto}</span>
+                </div>
+                <div class="card-desc">${chamado.descricao}</div>
+                ${chamado.telefone ? `<div class="card-obs">📞 ${chamado.telefone}</div>` : ''}
+                ${chamado.dataReserva ? `<div class="card-obs" style="color:#d32f2f; font-weight:bold;">📅 ${chamado.dataReserva}</div>` : ''}
+                <div style="margin-top:10px;">${btnHtml}</div>
+            </div>`;
         }
 
+        // --- ENVIAR ---
         window.enviarChamado = async function() {
             const quarto = document.getElementById('quarto').value;
             const telefone = document.getElementById('telefone').value;
@@ -447,76 +448,44 @@
             let dataReserva = null;
 
             if (tipo === 'Praia') {
-                const itens = [];
-                if(document.getElementById('check-cadeira').checked) {
-                    const qtd = document.getElementById('qtd-cadeira').value;
-                    if(!qtd) return alert("Informe a quantidade de cadeiras.");
-                    itens.push(`Cadeira (${qtd})`);
-                }
-                if(document.getElementById('check-toalha').checked) {
-                    const qtd = document.getElementById('qtd-toalha').value;
-                    if(!qtd) return alert("Informe a quantidade de toalhas.");
-                    itens.push(`Toalha (${qtd})`);
-                }
-                if(document.getElementById('check-cooler').checked) {
-                    const detalhe = document.getElementById('detalhe-cooler').value;
-                    if(!detalhe) return alert("Informe o que deseja no cooler.");
-                    itens.push(`Cooler [${detalhe}]`);
-                }
-
-                if (itens.length === 0) return alert("Selecione pelo menos um item.");
-                desc = `[ALUGUEL: ${itens.join(', ')}] \nObs: ` + desc;
+                let itens = [];
+                if(document.getElementById('check-cadeira').checked) itens.push(`Cadeira (${document.getElementById('qtd-cadeira').value||1})`);
+                if(document.getElementById('check-toalha').checked) itens.push(`Toalha (${document.getElementById('qtd-toalha').value||1})`);
+                if(document.getElementById('check-cooler').checked) itens.push(`Cooler [${document.getElementById('detalhe-cooler').value}]`);
+                
+                if (itens.length === 0) return alert("Selecione um item.");
+                desc = `[ALUGUEL]: ${itens.join(', ')} \nObs: ${desc}`;
             }
 
             if (tipo === 'Sunset') {
                 dataReserva = document.getElementById('data-sunset').value;
-                if(!dataReserva) return alert("Escolha a data da reserva.");
-
-                const q = query(collection(db, "chamados"), 
-                    where("tipo", "==", "Sunset"), 
-                    where("hotel", "==", hotelAtual),
-                    where("dataReserva", "==", dataReserva)
-                );
-                
-                const querySnapshot = await getDocs(q);
-                if(querySnapshot.size >= 5) {
-                    alert(`Desculpe! O dia ${dataReserva} já está lotado.`);
-                    return; 
-                }
-                desc = `[SUNSET ESPUMANTE] Data: ${dataReserva} | R$ 120,00 \nObs: ` + desc;
+                if(!dataReserva) return alert("Escolha a data.");
+                // Verifica 5 vagas
+                const q = query(collection(db, "chamados"), where("tipo", "==", "Sunset"), where("hotel", "==", hotelAtual), where("dataReserva", "==", dataReserva));
+                const snap = await getDocs(q);
+                if(snap.size >= 5) return alert("Data lotada!");
+                desc = `[SUNSET] Data: ${dataReserva} | R$ 120,00 \nObs: ${desc}`;
             }
 
-            if(!quarto || !tipo) return alert("Preencha o quarto e o tipo.");
+            if(!quarto || !tipo) return alert("Preencha Quarto e Tipo.");
 
             try {
                 const btn = document.querySelector('.btn-success');
-                btn.disabled = true;
-                btn.innerText = "Enviando...";
-
+                btn.disabled = true; btn.innerText = "Enviando...";
                 await addDoc(collection(db, "chamados"), {
                     hotel: hotelAtual, quarto: quarto, telefone: telefone, tipo: tipo, descricao: desc, 
-                    status: "pendente", 
-                    dataReserva: dataReserva, 
-                    data: serverTimestamp()
+                    status: "pendente", dataReserva: dataReserva, data: serverTimestamp()
                 });
-                
-                alert("Solicitação enviada com sucesso!");
-                location.reload(); 
-            } catch (e) { 
-                console.error(e); 
-                alert("Erro ao enviar.");
-                document.querySelector('.btn-success').disabled = false;
-            }
+                alert("Enviado!"); location.reload();
+            } catch (e) { alert("Erro."); btn.disabled = false; }
         }
 
         window.mudarStatus = async function(id, novoStatus) {
             const chamadoRef = doc(db, "chamados", id);
-            let updateData = { status: novoStatus };
-            if(novoStatus === 'resolvido') updateData.dataResolucao = serverTimestamp();
-            await updateDoc(chamadoRef, updateData);
+            await updateDoc(chamadoRef, { status: novoStatus, dataResolucao: serverTimestamp() });
         }
 
-        // --- VERIFICAÇÃO DE URL (NO FINAL DO SCRIPT) ---
+        // --- VERIFICAÇÃO URL ---
         function verificarRedirecionamento() {
             const params = new URLSearchParams(window.location.search);
             const hotelParam = params.get('hotel');
@@ -526,7 +495,6 @@
                 else if(hotelParam === 'ancoras') mostrarAreaHospede('Porto das Ancoras', true);
             }
         }
-        // Executa a verificação APÓS todas as funções estarem definidas
         verificarRedirecionamento();
     </script>
 </body>
