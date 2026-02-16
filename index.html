@@ -51,42 +51,19 @@
         .input-row input { flex: 1; }
         .required-field::after { content: " *"; color: var(--danger); }
 
-        /* --- KIT PRAIA (LAYOUT AJUSTADO "AO LADO") --- */
+        /* --- KIT PRAIA (LAYOUT AJUSTADO) --- */
         .beach-kit-container { background: #e3f2fd; border: 1px solid #90caf9; padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: left; animation: slideDown 0.3s ease-out; }
         
-        .checkbox-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            height: 40px;
-        }
-        
-        .checkbox-label {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.95rem;
-            cursor: pointer;
-            width: 150px;
-        }
+        .checkbox-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; height: 40px; }
+        .checkbox-label { display: flex; align-items: center; gap: 10px; font-size: 0.95rem; cursor: pointer; width: 150px; }
         input[type="checkbox"] { transform: scale(1.3); margin: 0; cursor: pointer; }
         
         /* Inputs que aparecem ao lado */
-        .dynamic-input { 
-            flex: 1;
-            margin-bottom: 0 !important; 
-            padding: 8px !important;
-            height: 38px;
-            display: none;
-            font-size: 0.9rem !important;
-        }
+        .dynamic-input { flex: 1; margin-bottom: 0 !important; padding: 8px !important; height: 38px; display: none; font-size: 0.9rem !important; }
 
         /* --- PÔR DO SOL (SUNSET) --- */
         .sunset-container { background: #fff3e0; border: 1px solid #ffb74d; padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: center; animation: slideDown 0.3s ease-out; }
-        /* IMAGEM DO PÔR DO SOL */
         .sunset-img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
-        
         .price-tag { background: #2ecc71; color: white; padding: 5px 10px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; margin-bottom: 10px; display: inline-block;}
         .time-info { font-size: 0.9rem; color: #666; margin-bottom: 10px; display: block; }
 
@@ -170,6 +147,7 @@
                 <option value="" disabled selected data-key="select_default">Selecione o que precisa...</option>
                 <option value="Praia" id="opt-praia" data-key="opt_beach">🏖️ Aluguel Cadeira, Toalha, Cooler</option>
                 <option value="Sunset" id="opt-sunset" data-key="opt_sunset">🥂 Pôr do Sol com Espumante</option>
+
                 <option value="Serviço" data-key="opt_service">🛏️ Serviço de Quarto</option>
                 <option value="Manutenção" data-key="opt_maint">🛠️ Manutenção</option>
                 <option value="Sugestão" data-key="opt_idea">💡 Sugestão / Elogio</option>
@@ -206,11 +184,9 @@
 
             <div id="area-sunset" class="sunset-container hidden">
                 <img src="img/por do sol.jpg" class="sunset-img" alt="Pôr do Sol">
-                
                 <h3 style="margin:5px 0;">Pôr do Sol com Espumante</h3>
                 <span class="price-tag">R$ 120,00</span>
                 <span class="time-info">⏰ 16:30 - 18:30</span>
-                
                 <label style="display:block; margin-top:10px; font-weight:bold;">Escolha a Data:</label>
                 <input type="date" id="data-sunset" style="margin-top:5px;">
                 <p style="font-size:0.8rem; color:#e65100;">* Máximo 5 reservas por dia.</p>
@@ -276,33 +252,32 @@
         let isMaster = false;
         let currentLang = 'pt';
         
+        // TRADUÇÕES
         const translations = {
             pt: {
                 login_title: "Acesso ao Sistema", login_subtitle: "Selecione uma opção abaixo:", guest: "Hóspede", admin_area: "Área Administrativa", pass_placeholder: "Senha...", enter_btn: "Entrar",
                 welcome_msg: "Bem-vindo! Como podemos ajudar?", room_placeholder: "Nº do Quarto *", phone_placeholder: "Telefone (Opcional)", select_default: "Selecione o que precisa...", 
-                opt_beach: "🏖️ Aluguel Cadeira, Toalha, Cooler",
-                opt_sunset: "🥂 Pôr do Sol com Espumante",
-                opt_service: "🛏️ Serviço de Quarto", opt_maint: "🛠️ Manutenção", opt_idea: "💡 Sugestão / Elogio", opt_complain: "📢 Reclamação", desc_placeholder: "Alguma observação extra?", send_btn: "Enviar Solicitação", back_btn: "Voltar", 
+                opt_beach: "🏖️ Aluguel Cadeira, Toalha, Cooler", opt_sunset: "🥂 Pôr do Sol com Espumante", opt_service: "🛏️ Serviço de Quarto", opt_maint: "🛠️ Manutenção", opt_idea: "💡 Sugestão / Elogio", opt_complain: "📢 Reclamação", 
+                desc_placeholder: "Alguma observação extra?", send_btn: "Enviar Solicitação", back_btn: "Voltar", 
                 beach_select_items: "Selecione os itens:", beach_chair: "Cadeira de Praia", beach_cooler: "Cooler", beach_towel: "Toalha de Praia"
             },
             en: {
                 login_title: "System Access", login_subtitle: "Select an option below:", guest: "Guest", admin_area: "Staff Area", pass_placeholder: "Password...", enter_btn: "Login",
                 welcome_msg: "Welcome! How can we help?", room_placeholder: "Room Number *", phone_placeholder: "Phone (Optional)", select_default: "Select what you need...", 
-                opt_beach: "🏖️ Rent Beach Chair, Towel, Cooler",
-                opt_sunset: "🥂 Sunset with Sparkling Wine",
-                opt_service: "🛏️ Room Service", opt_maint: "🛠️ Maintenance", opt_idea: "💡 Suggestion / Compliment", opt_complain: "📢 Complaint", desc_placeholder: "Any extra comments?", send_btn: "Send Request", back_btn: "Back", 
+                opt_beach: "🏖️ Rent Beach Chair, Towel, Cooler", opt_sunset: "🥂 Sunset with Sparkling Wine", opt_service: "🛏️ Room Service", opt_maint: "🛠️ Maintenance", opt_idea: "💡 Suggestion / Compliment", opt_complain: "📢 Complaint", 
+                desc_placeholder: "Any extra comments?", send_btn: "Send Request", back_btn: "Back", 
                 beach_select_items: "Select items:", beach_chair: "Beach Chair", beach_cooler: "Cooler", beach_towel: "Beach Towel"
             },
             es: {
                 login_title: "Acceso al Sistema", login_subtitle: "Seleccione una opción:", guest: "Huésped", admin_area: "Área Administrativa", pass_placeholder: "Contraseña...", enter_btn: "Entrar",
                 welcome_msg: "¡Bienvenido! ¿Cómo podemos ayudar?", room_placeholder: "Número de Habitación *", phone_placeholder: "Teléfono (Opcional)", select_default: "Seleccione lo que necesita...", 
-                opt_beach: "🏖️ Alquiler Silla, Toalla, Hielera",
-                opt_sunset: "🥂 Puesta de Sol con Espumoso",
-                opt_service: "🛏️ Servicio de Habitaciones", opt_maint: "🛠️ Mantenimiento", opt_idea: "💡 Sugerencia / Elogio", opt_complain: "📢 Queja", desc_placeholder: "¿Alguna observación extra?", send_btn: "Enviar Solicitud", back_btn: "Volver", 
+                opt_beach: "🏖️ Alquiler Silla, Toalla, Hielera", opt_sunset: "🥂 Puesta de Sol con Espumoso", opt_service: "🛏️ Servicio de Habitaciones", opt_maint: "🛠️ Mantenimiento", opt_idea: "💡 Sugerencia / Elogio", opt_complain: "📢 Queja", 
+                desc_placeholder: "¿Alguna observación extra?", send_btn: "Enviar Solicitud", back_btn: "Volver", 
                 beach_select_items: "Seleccione los artículos:", beach_chair: "Silla de Playa", beach_cooler: "Hielera / Cooler", beach_towel: "Toalla de Playa"
             }
         };
 
+        // --- FUNÇÕES GLOBAIS ---
         window.mudarIdioma = function(lang) {
             currentLang = lang;
             document.querySelectorAll('.lang-btn').forEach(el => el.classList.remove('active'));
@@ -317,17 +292,6 @@
                 if(translations[lang][key]) elem.placeholder = translations[lang][key];
             });
         }
-
-        function verificarRedirecionamento() {
-            const params = new URLSearchParams(window.location.search);
-            const hotelParam = params.get('hotel');
-            if (hotelParam) {
-                if(hotelParam === 'hit') mostrarAreaHospede('Hit Hotel', true);
-                else if(hotelParam === 'porto') mostrarAreaHospede('Porto Salvador', true);
-                else if(hotelParam === 'ancoras') mostrarAreaHospede('Porto das Ancoras', true);
-            }
-        }
-        verificarRedirecionamento();
 
         window.fazerLogin = function() {
             const senha = document.getElementById('senhaInput').value;
@@ -551,6 +515,19 @@
             if(novoStatus === 'resolvido') updateData.dataResolucao = serverTimestamp();
             await updateDoc(chamadoRef, updateData);
         }
+
+        // --- VERIFICAÇÃO DE URL (NO FINAL DO SCRIPT) ---
+        function verificarRedirecionamento() {
+            const params = new URLSearchParams(window.location.search);
+            const hotelParam = params.get('hotel');
+            if (hotelParam) {
+                if(hotelParam === 'hit') mostrarAreaHospede('Hit Hotel', true);
+                else if(hotelParam === 'porto') mostrarAreaHospede('Porto Salvador', true);
+                else if(hotelParam === 'ancoras') mostrarAreaHospede('Porto das Ancoras', true);
+            }
+        }
+        // Executa a verificação APÓS todas as funções estarem definidas
+        verificarRedirecionamento();
     </script>
 </body>
 </html>
