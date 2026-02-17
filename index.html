@@ -39,7 +39,7 @@
         .color-es.active { color: #e74c3c; }
 
         /* Botões e Inputs */
-        .btn { width: 100%; padding: 15px; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; margin-bottom: 12px; transition: 0.2s; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
+        .btn { width: 100%; padding: 15px; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; margin-bottom: 12px; transition: 0.2s; font-size: 1rem; display: flex; align-items: center; justify-content: center; text-decoration: none;}
         .btn-hotel { background: white; border: 2px solid #ccc; color: #444; }
         .btn-hotel:hover { border-color: var(--primary); color: var(--primary); background: #f8fbff; }
         .btn-primary { background: linear-gradient(135deg, var(--primary), #00a8cc); color: white; }
@@ -49,6 +49,11 @@
         .input-row { display: flex; gap: 10px; }
         .input-row input { flex: 1; }
 
+        /* --- RESTAURANTE --- */
+        .restaurante-container { background: #fff3e0; border: 2px solid #ffb74d; padding: 20px; border-radius: 10px; margin-bottom: 15px; text-align: center; animation: slideDown 0.3s ease-out; }
+        .btn-menu { background: #e65100; color: white; width: 100%; padding: 15px; font-weight: bold; border-radius: 8px; display: inline-block; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.2s; }
+        .btn-menu:hover { background: #ff6d00; transform: scale(1.02); }
+
         /* --- KIT PRAIA --- */
         .beach-kit-container { background: #e3f2fd; border: 2px solid #90caf9; padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: left; }
         .checkbox-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; height: 40px; }
@@ -57,12 +62,12 @@
         .dynamic-input { flex: 1; margin-bottom: 0 !important; padding: 8px !important; height: 38px; display: none; font-size: 0.9rem !important; border: 2px solid var(--primary); }
 
         /* --- PÔR DO SOL --- */
-        .sunset-container { background: #fff3e0; border: 2px solid #ffb74d; padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: center; }
+        .sunset-container { background: #fce4ec; border: 2px solid #f06292; padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: center; }
         .sunset-img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
         .price-tag { background: #2ecc71; color: white; padding: 5px 10px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; margin-bottom: 10px; display: inline-block;}
         .time-info { font-size: 0.9rem; color: #666; margin-bottom: 10px; display: block; }
 
-        /* --- DASHBOARD MASTER (QUADRO KANBAN) --- */
+        /* --- DASHBOARD MASTER --- */
         .dashboard-container { width: 100%; margin-top: 10px; padding: 0 10px; }
         
         .tabs-container { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #ddd; padding-bottom: 10px; }
@@ -70,70 +75,26 @@
         .tab-btn:hover { background: #e0e0e0; }
         .tab-btn.active { background: var(--primary); color: white; box-shadow: 0 4px 10px rgba(0,86,179,0.3); }
 
-        .board-grid { 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 20px; 
-            align-items: start; 
-            justify-content: center;
-            width: 100%;
-        }
+        .board-grid { display: flex; flex-wrap: wrap; gap: 20px; align-items: start; justify-content: center; width: 100%; }
+        .board-column { background: #ffffff; padding: 10px; border-radius: 8px; width: 300px; flex-grow: 1; max-width: 350px; border-top: 5px solid #ccc; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; gap: 10px; min-height: 150px; }
+        .board-header { font-weight: 900; color: #222; text-transform: uppercase; font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; border-bottom: 1px solid #eee; }
         
-        .board-column { 
-            background: #ffffff; 
-            padding: 10px; 
-            border-radius: 8px; 
-            width: 300px; 
-            flex-grow: 1;
-            max-width: 350px;
-            border-top: 5px solid #ccc;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            display: flex; flex-direction: column; gap: 10px;
-            min-height: 150px;
-        }
-        
-        .board-header { 
-            font-weight: 900; color: #222; text-transform: uppercase; font-size: 0.85rem; 
-            display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; border-bottom: 1px solid #eee;
-        }
-        
-        /* ESTILO DOS CARTÕES (CARDS) - REFORÇADO */
-        .ticket-card { 
-            display: block !important; /* Força aparecer */
-            background: white; 
-            padding: 15px; 
-            border-radius: 8px; 
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra mais forte */
-            text-align: left; 
-            border: 1px solid #ddd;
-            margin-bottom: 10px;
-            min-height: 100px;
-        }
-        
+        .ticket-card { display: block !important; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); text-align: left; border: 1px solid #ddd; margin-bottom: 10px; min-height: 100px; }
         .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
         .card-time { background: #333; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
         .card-room { font-size: 1.2rem; font-weight: 900; color: #000; background: #e3f2fd; padding: 4px 10px; border-radius: 4px; border: 1px solid #90caf9;}
-        
         .card-desc { font-size: 1rem; color: #000; font-weight: 600; line-height: 1.4; display: block; margin-bottom: 10px; }
         .card-obs { font-size: 0.85rem; color: #555; font-style: italic; background: #f5f5f5; padding: 5px; border-radius: 4px; display: block; margin-bottom: 10px; }
 
-        /* STATUS VISUAL */
-        /* Pendente (Vermelho) */
         .status-red { border-left: 10px solid var(--danger); background-color: #fff0f0; }
         .btn-start { width: 100%; padding: 10px; background: #fff3e0; border: 1px solid #ffcc80; color: #e65100; font-weight: bold; cursor: pointer; border-radius: 6px; }
-        .btn-start:hover { background: #ffe0b2; }
-
-        /* Em Andamento (Amarelo) */
         .status-yellow { border-left: 10px solid var(--warning); background-color: #fffde7; }
         .btn-resolve { width: 100%; padding: 10px; background: #e8f5e9; border: 1px solid #a5d6a7; color: #2e7d32; font-weight: bold; cursor: pointer; border-radius: 6px; }
-        .btn-resolve:hover { background: #c8e6c9; }
-
-        /* Resolvido (Verde) */
         .status-green { border-left: 10px solid var(--success); background-color: #e8f5e9; opacity: 0.8; }
         .btn-archive { width: 100%; padding: 10px; background: #424242; border: 1px solid #212121; color: white; font-weight: bold; cursor: pointer; border-radius: 6px; }
-
         .tag-count { background: #000; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem; }
-        
+        #card-filtro { background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; width: 100%; max-width: 600px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+
         /* RELATÓRIOS */
         .filters-bar { background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; gap: 15px; align-items: center; flex-wrap: wrap; border: 1px solid #ddd; }
         .kpi-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px; }
@@ -143,6 +104,8 @@
         .report-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
         .report-table th { text-align: left; padding: 10px; background: #f5f5f5; border-bottom: 2px solid #ddd; }
         .report-table td { padding: 10px; border-bottom: 1px solid #eee; }
+        
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -180,27 +143,42 @@
             </div>
             <select id="tipo" onchange="verificarOpcao()">
                 <option value="" disabled selected>Selecione...</option>
+                <option value="Restaurante" id="opt-restaurante">🍽️ Pedido Restaurante</option>
                 <option value="Recepção">🗣️ Fale com a Recepção</option>
                 <option value="Manutenção">🛠️ Manutenção</option>
-                <option value="Praia">🏖️ Aluguel Cadeira, Toalha, Cooler</option>
-                <option value="Sunset">🥂 Pôr do Sol com Espumante</option>
+                <option value="Praia" id="opt-praia">🏖️ Aluguel Cadeira, Toalha, Cooler</option>
+                <option value="Sunset" id="opt-sunset">🥂 Pôr do Sol com Espumante</option>
                 <option value="Sugestão">💡 Sugestão / Elogio</option>
                 <option value="Reclamação">📢 Reclamação</option>
             </select>
+
+            <div id="area-restaurante" class="restaurante-container hidden">
+                <p style="font-weight:bold; color:#e65100; margin-bottom:10px;">Deseja fazer um pedido?</p>
+                <a href="https://mwfreitas-wq.github.io/cardapiolavista2/" target="_blank" class="btn btn-menu">
+                    🍽️ ABRIR CARDÁPIO DIGITAL
+                </a>
+                <p style="font-size:0.8rem; margin-top:10px; color:#666;">(Abre em nova janela)</p>
+            </div>
+
             <div id="area-kit-praia" class="beach-kit-container hidden">
                 <strong>Itens:</strong>
                 <div class="checkbox-row"><label><input type="checkbox" id="check-cadeira" onchange="toggleInput('check-cadeira','qtd-cadeira')"> Cadeira</label><input type="number" id="qtd-cadeira" class="dynamic-input" placeholder="Qtd"></div>
                 <div class="checkbox-row"><label><input type="checkbox" id="check-toalha" onchange="toggleInput('check-toalha','qtd-toalha')"> Toalha</label><input type="number" id="qtd-toalha" class="dynamic-input" placeholder="Qtd"></div>
                 <div class="checkbox-row"><label><input type="checkbox" id="check-cooler" onchange="toggleInput('check-cooler','detalhe-cooler')"> Cooler</label><input type="text" id="detalhe-cooler" class="dynamic-input" placeholder="O que deseja?"></div>
             </div>
+
             <div id="area-sunset" class="sunset-container hidden">
                 <img src="img/por do sol.jpg" class="sunset-img">
                 <h3>Pôr do Sol</h3><span class="price-tag">R$ 120,00</span>
                 <label>Data:</label><input type="date" id="data-sunset">
             </div>
-            <textarea id="descricao" rows="4" placeholder="Descreva..."></textarea>
-            <button onclick="enviarChamado()" class="btn btn-success">Enviar</button>
-            <button id="btn-voltar" onclick="location.reload()" class="btn btn-hotel hidden">Voltar</button>
+
+            <div id="form-comum">
+                <textarea id="descricao" rows="4" placeholder="Descreva..."></textarea>
+                <button onclick="enviarChamado()" class="btn btn-success">Enviar Solicitação</button>
+            </div>
+            
+            <button id="btn-voltar" onclick="location.reload()" class="btn btn-hotel hidden" style="margin-top:10px;">Voltar</button>
         </div>
 
         <div id="tela-admin" class="hidden dashboard-container">
@@ -273,13 +251,11 @@
         let isMaster = false;
         let todosDadosCache = [];
 
-        // TORNA FUNÇÕES GLOBAIS (IMPORTANTE)
         window.switchTab = function(tabName) {
             document.getElementById('view-board').classList.add('hidden');
             document.getElementById('view-reports').classList.add('hidden');
             document.getElementById('btn-tab-board').classList.remove('active');
             document.getElementById('btn-tab-reports').classList.remove('active');
-
             if(tabName === 'board') {
                 document.getElementById('view-board').classList.remove('hidden');
                 document.getElementById('btn-tab-board').classList.add('active');
@@ -296,7 +272,6 @@
         }
 
         window.fazerLogin = function() {
-            console.log("Tentando login...");
             const senha = document.getElementById('senhaInput').value;
             if (senha === "master") { isMaster = true; document.getElementById('card-filtro').classList.remove('hidden'); entrarPainel("TODOS"); }
             else if (senha === "hotel1") { entrarPainel("Hit Hotel"); }
@@ -322,19 +297,12 @@
                     d.id = doc.id;
                     if(d.data) d.dateObj = new Date(d.data.seconds * 1000);
                     if(d.dataResolucao) d.resDateObj = new Date(d.dataResolucao.seconds * 1000);
-                    
                     todosDadosCache.push(d);
-                    
-                    // Se não estiver arquivado, vai pro quadro
-                    if (d.status !== 'arquivado') {
-                        pendentesRender.push(d);
-                    }
+                    if (d.status !== 'arquivado') pendentesRender.push(d);
                 });
 
                 renderizarQuadro(pendentesRender);
-                if(!document.getElementById('view-reports').classList.contains('hidden')) {
-                    gerarRelatorios();
-                }
+                if(!document.getElementById('view-reports').classList.contains('hidden')) gerarRelatorios();
             });
         }
 
@@ -349,9 +317,7 @@
 
             let count = 0;
             lista.forEach(item => {
-                // FILTRO DO KANBAN:
-                // Se resolvido, mostra? SIM, mas verde.
-                // Só não mostra se for 'arquivado' (já filtrado antes)
+                if (item.status === 'resolvido') return; // Filtra resolvidos do quadro
                 count++;
                 let card = criarCartaoHTML(item);
                 let t = item.tipo;
@@ -403,7 +369,6 @@
 
             return `
             <div class="ticket-card ${classStatus}">
-                <div style="font-size:0.7rem; font-weight:bold; margin-bottom:5px; text-align:right;">${badgeText}</div>
                 <div class="card-top"><span class="card-time">🕒 ${hora}</span><span class="card-room">Q. ${chamado.quarto}</span></div>
                 <span class="card-desc">${chamado.descricao}</span>
                 ${chamado.telefone ? `<span class="card-obs">📞 ${chamado.telefone}</span>` : ''}
@@ -426,17 +391,14 @@
             });
 
             let resolvidos = 0, pendentes = 0, temposTotal = 0, qtdComTempo = 0;
-            let categoriasCount = {}, temposPorSetor = {}; 
+            let categoriasCount = {}; 
 
             dadosFiltrados.forEach(d => {
                 if(d.status === 'resolvido' || d.status === 'arquivado') {
                     resolvidos++;
                     if(d.dateObj && d.resDateObj) {
-                        let diffMin = (d.resDateObj - d.dateObj) / 1000 / 60; 
-                        temposTotal += diffMin;
+                        temposTotal += (d.resDateObj - d.dateObj) / 1000 / 60; 
                         qtdComTempo++;
-                        if(!temposPorSetor[d.tipo]) temposPorSetor[d.tipo] = {soma:0, qtd:0};
-                        temposPorSetor[d.tipo].soma += diffMin; temposPorSetor[d.tipo].qtd++;
                     }
                 } else { pendentes++; }
                 if(!categoriasCount[d.tipo]) categoriasCount[d.tipo] = 0;
@@ -463,7 +425,7 @@
             let ultimos = dadosFiltrados.sort((a,b) => b.dateObj - a.dateObj).slice(0, 50);
             ultimos.forEach(d => {
                 let duracao = "--";
-                if(d.status === 'resolvido' && d.dateObj && d.resDateObj) duracao = Math.round((d.resDateObj - d.dateObj)/1000/60) + " min";
+                if((d.status === 'resolvido' || d.status === 'arquivado') && d.dateObj && d.resDateObj) duracao = Math.round((d.resDateObj - d.dateObj)/1000/60) + " min";
                 tbodyAudit.innerHTML += `<tr><td>${d.dateObj?.toLocaleString()}</td><td>${d.quarto}</td><td>${d.tipo}</td><td>${d.status}</td><td>${duracao}</td></tr>`;
             });
         }
@@ -495,25 +457,34 @@
             
             const optionPraia = document.getElementById('opt-praia');
             const optionSunset = document.getElementById('opt-sunset');
-            if(hotel === 'Porto das Ancoras') { optionPraia.hidden = true; optionPraia.disabled = true; optionSunset.hidden = true; optionSunset.disabled = true; } 
-            else { optionPraia.hidden = false; optionPraia.disabled = false; optionSunset.hidden = false; optionSunset.disabled = false; }
+            const optionRest = document.getElementById('opt-restaurante');
+            
+            if(hotel === 'Porto das Ancoras') { optionPraia.hidden = true; optionPraia.disabled = true; optionSunset.hidden = true; optionSunset.disabled = true; optionRest.hidden = true; optionRest.disabled = true; } 
+            else { optionPraia.hidden = false; optionPraia.disabled = false; optionSunset.hidden = false; optionSunset.disabled = false; optionRest.hidden = false; optionRest.disabled = false; }
             if(veioDoQR) document.getElementById('btn-voltar').classList.add('hidden'); else document.getElementById('btn-voltar').classList.remove('hidden');
         }
 
-        // Funções auxiliares (mesmas anteriores)
-        window.mudarIdioma = function(lang) { /* ... (igual anterior) ... */ }
         window.verificarOpcao = function() {
-            const select = document.getElementById('tipo');
+            const val = document.getElementById('tipo').value;
             document.getElementById('area-kit-praia').classList.add('hidden');
             document.getElementById('area-sunset').classList.add('hidden');
-            if (select.value === 'Praia') document.getElementById('area-kit-praia').classList.remove('hidden');
-            if (select.value === 'Sunset') document.getElementById('area-sunset').classList.remove('hidden');
+            document.getElementById('area-restaurante').classList.add('hidden');
+            document.getElementById('form-comum').classList.remove('hidden');
+
+            if(val === 'Praia') document.getElementById('area-kit-praia').classList.remove('hidden');
+            else if(val === 'Sunset') document.getElementById('area-sunset').classList.remove('hidden');
+            else if(val === 'Restaurante') {
+                document.getElementById('area-restaurante').classList.remove('hidden');
+                document.getElementById('form-comum').classList.add('hidden'); // Esconde botão de enviar
+            }
         }
+
         window.toggleInput = function(checkId, inputId) {
             let chk = document.getElementById(checkId);
             let inp = document.getElementById(inputId);
             if(chk.checked) { inp.style.display = 'block'; inp.focus(); } else { inp.style.display = 'none'; inp.value=''; }
         }
+
         window.enviarChamado = async function() {
             const quarto = document.getElementById('quarto').value;
             const telefone = document.getElementById('telefone').value;
@@ -545,7 +516,11 @@
             } catch(e) { alert("Erro"); }
         }
 
-        // Verifica URL
+        window.mudarIdioma = function(lang) {
+            // Implementação simplificada para não quebrar
+            console.log("Idioma mudado para:", lang);
+        }
+
         const params = new URLSearchParams(window.location.search);
         const h = params.get('hotel');
         if(h) { if(h==='hit') mostrarAreaHospede('Hit Hotel', true); else if(h==='porto') mostrarAreaHospede('Porto Salvador', true); else if(h==='ancoras') mostrarAreaHospede('Porto das Ancoras', true); }
