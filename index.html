@@ -31,11 +31,14 @@
         .btn-logo { height: 30px; vertical-align: middle; margin-right: 10px; }
 
         /* --- IDIOMAS --- */
-        .lang-options { display: flex; gap: 10px; font-size: 0.9rem; }
-        .lang-btn { cursor: pointer; font-weight: 700; opacity: 0.3; transition: opacity 0.2s; text-decoration: none; color: #333; }
-        .lang-btn:hover, .lang-btn.active { opacity: 1; text-decoration: underline; }
+        .lang-options { display: flex; gap: 15px; font-size: 0.95rem; background: #f5f5f5; padding: 5px 15px; border-radius: 20px;}
+        .lang-btn { cursor: pointer; font-weight: 600; opacity: 0.4; transition: opacity 0.2s; text-decoration: none; color: #555; }
+        .lang-btn:hover { opacity: 1; }
+        
+        /* Cores Ativas */
+        .lang-btn.active { opacity: 1; text-decoration: underline; font-weight: 900; }
         .color-br.active { color: #000; }
-        .color-us.active { color: #0056b3; }
+        .color-en.active { color: #0056b3; }
         .color-es.active { color: #e74c3c; }
 
         /* Botões e Inputs */
@@ -45,19 +48,21 @@
         .btn-primary { background: linear-gradient(135deg, var(--primary), #00a8cc); color: white; }
         .btn-success { background: var(--success); color: white; }
         .btn-sm { padding: 8px 15px; width: auto; font-size: 0.9rem; }
+        
+        /* Inputs */
         input, select, textarea { width: 100%; padding: 14px; margin-bottom: 15px; border: 1px solid #999; border-radius: 8px; background: #fff; box-sizing: border-box; font-family: inherit; font-size: 1rem; color: #000;}
         .input-row { display: flex; gap: 10px; }
         .input-row input { flex: 1; }
 
         /* --- RESTAURANTE --- */
-        .restaurante-container { background: #fff3e0; border: 2px solid #ffb74d; padding: 20px; border-radius: 10px; margin-bottom: 15px; text-align: center; animation: slideDown 0.3s ease-out; }
+        .restaurante-container { background: #fff3e0; border: 2px solid #ffb74d; padding: 20px; border-radius: 10px; margin-bottom: 15px; text-align: center; }
         .btn-menu { background: #e65100; color: white; width: 100%; padding: 15px; font-weight: bold; border-radius: 8px; display: inline-block; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.2s; }
         .btn-menu:hover { background: #ff6d00; transform: scale(1.02); }
 
-        /* --- KIT PRAIA --- */
+        /* --- KIT PRAIA (ALINHAMENTO) --- */
         .beach-kit-container { background: #e3f2fd; border: 2px solid #90caf9; padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: left; }
-        .checkbox-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; height: 40px; }
-        .checkbox-label { display: flex; align-items: center; gap: 10px; font-size: 0.95rem; cursor: pointer; width: 150px; font-weight: bold; color: #333; }
+        .checkbox-row { display: flex; align-items: center; justify-content: flex-start; margin-bottom: 10px; min-height: 40px; gap: 10px; }
+        .checkbox-label { display: flex; align-items: center; gap: 8px; font-size: 1rem; cursor: pointer; font-weight: 600; color: #333; min-width: 120px; }
         input[type="checkbox"] { transform: scale(1.3); margin: 0; cursor: pointer; }
         .dynamic-input { flex: 1; margin-bottom: 0 !important; padding: 8px !important; height: 38px; display: none; font-size: 0.9rem !important; border: 2px solid var(--primary); }
 
@@ -69,10 +74,8 @@
 
         /* --- DASHBOARD MASTER --- */
         .dashboard-container { width: 100%; margin-top: 10px; padding: 0 10px; }
-        
         .tabs-container { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #ddd; padding-bottom: 10px; }
         .tab-btn { padding: 10px 20px; border: none; background: transparent; font-weight: bold; color: #666; cursor: pointer; font-size: 1.1rem; border-radius: 8px; }
-        .tab-btn:hover { background: #e0e0e0; }
         .tab-btn.active { background: var(--primary); color: white; box-shadow: 0 4px 10px rgba(0,86,179,0.3); }
 
         .board-grid { display: flex; flex-wrap: wrap; gap: 20px; align-items: start; justify-content: center; width: 100%; }
@@ -117,7 +120,7 @@
                 <div style="font-size: 2rem;">🏨</div>
                 <div class="lang-options">
                     <span onclick="mudarIdioma('pt')" class="lang-btn color-br active">BR</span>
-                    <span onclick="mudarIdioma('en')" class="lang-btn color-us">EN</span>
+                    <span onclick="mudarIdioma('en')" class="lang-btn color-en">EN</span>
                     <span onclick="mudarIdioma('es')" class="lang-btn color-es">ES</span>
                 </div>
             </div>
@@ -134,51 +137,79 @@
         <div id="tela-hospede" class="app-card hidden">
             <div class="header-row">
                 <div class="hotel-identity"><img id="logo-hotel-topo" src="" alt="Logo" class="hotel-logo-header"></div>
-                <div class="lang-options"><span onclick="mudarIdioma('pt')" class="lang-btn color-br active">BR</span></div>
+                <div class="lang-options">
+                    <span onclick="mudarIdioma('pt')" class="lang-btn color-br active">BR</span>
+                    <span onclick="mudarIdioma('en')" class="lang-btn color-en">EN</span>
+                    <span onclick="mudarIdioma('es')" class="lang-btn color-es">ES</span>
+                </div>
             </div>
+            
             <p id="subtitulo-hospede" data-key="welcome_msg">Bem-vindo!</p>
+            
             <div class="input-row">
-                <input type="text" id="quarto" placeholder="Nº do Quarto *" required>
-                <input type="text" id="telefone" placeholder="Telefone">
+                <input type="text" id="quarto" placeholder="Nº do Quarto *" data-ph="room_placeholder" required>
+                <input type="text" id="telefone" placeholder="Telefone" data-ph="phone_placeholder">
             </div>
+            
             <select id="tipo" onchange="verificarOpcao()">
-                <option value="" disabled selected>Selecione...</option>
-                <option value="Restaurante" id="opt-restaurante">🍽️ Pedido Restaurante</option>
-                <option value="Recepção">🗣️ Fale com a Recepção</option>
-                <option value="Manutenção">🛠️ Manutenção</option>
-                <option value="Praia" id="opt-praia">🏖️ Aluguel Cadeira, Toalha, Cooler</option>
-                <option value="Sunset" id="opt-sunset">🥂 Pôr do Sol com Espumante</option>
-                <option value="Sugestão">💡 Sugestão / Elogio</option>
-                <option value="Reclamação">📢 Reclamação</option>
+                <option value="" disabled selected data-key="select_default">Selecione...</option>
+                <option value="Restaurante" id="opt-restaurante" data-key="opt_restaurante">🍽️ Pedido Restaurante</option>
+                <option value="Recepção" data-key="opt_service">🗣️ Fale com a Recepção</option>
+                <option value="Manutenção" data-key="opt_maint">🛠️ Manutenção</option>
+                <option value="Praia" id="opt-praia" data-key="opt_beach">🏖️ Aluguel Cadeira, Toalha, Cooler</option>
+                <option value="Sunset" id="opt-sunset" data-key="opt_sunset">🥂 Pôr do Sol com Espumante</option>
+                <option value="Sugestão" data-key="opt_idea">💡 Sugestão / Elogio</option>
+                <option value="Reclamação" data-key="opt_complain">📢 Reclamação</option>
             </select>
 
             <div id="area-restaurante" class="restaurante-container hidden">
-                <p style="font-weight:bold; color:#e65100; margin-bottom:10px;">Deseja fazer um pedido?</p>
-                <a href="https://mwfreitas-wq.github.io/cardapiolavista2/" target="_blank" class="btn btn-menu">
+                <p style="font-weight:bold; color:#e65100; margin-bottom:10px;" data-key="restaurante_msg">Deseja fazer um pedido?</p>
+                <a href="https://mwfreitas-wq.github.io/cardapiolavista2/" target="_blank" class="btn btn-menu" data-key="restaurante_btn">
                     🍽️ ABRIR CARDÁPIO DIGITAL
                 </a>
-                <p style="font-size:0.8rem; margin-top:10px; color:#666;">(Abre em nova janela)</p>
             </div>
 
             <div id="area-kit-praia" class="beach-kit-container hidden">
-                <strong>Itens:</strong>
-                <div class="checkbox-row"><label><input type="checkbox" id="check-cadeira" onchange="toggleInput('check-cadeira','qtd-cadeira')"> Cadeira</label><input type="number" id="qtd-cadeira" class="dynamic-input" placeholder="Qtd"></div>
-                <div class="checkbox-row"><label><input type="checkbox" id="check-toalha" onchange="toggleInput('check-toalha','qtd-toalha')"> Toalha</label><input type="number" id="qtd-toalha" class="dynamic-input" placeholder="Qtd"></div>
-                <div class="checkbox-row"><label><input type="checkbox" id="check-cooler" onchange="toggleInput('check-cooler','detalhe-cooler')"> Cooler</label><input type="text" id="detalhe-cooler" class="dynamic-input" placeholder="O que deseja?"></div>
+                <strong style="color:#0056b3; display:block; margin-bottom:10px;" data-key="beach_select_items">Itens disponíveis:</strong>
+                
+                <div class="checkbox-row">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="check-cadeira" onchange="toggleInput('check-cadeira','qtd-cadeira')"> 
+                        <span data-key="beach_chair">Cadeira</span>
+                    </label>
+                    <input type="number" id="qtd-cadeira" class="dynamic-input" placeholder="Qtd" data-ph="qty_placeholder">
+                </div>
+                
+                <div class="checkbox-row">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="check-toalha" onchange="toggleInput('check-toalha','qtd-toalha')"> 
+                        <span data-key="beach_towel">Toalha</span>
+                    </label>
+                    <input type="number" id="qtd-toalha" class="dynamic-input" placeholder="Qtd" data-ph="qty_placeholder">
+                </div>
+                
+                <div class="checkbox-row">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="check-cooler" onchange="toggleInput('check-cooler','detalhe-cooler')"> 
+                        <span data-key="beach_cooler">Cooler</span>
+                    </label>
+                    <input type="text" id="detalhe-cooler" class="dynamic-input" placeholder="Ex: Cerveja, Água..." data-ph="cooler_placeholder">
+                </div>
             </div>
 
             <div id="area-sunset" class="sunset-container hidden">
                 <img src="img/por do sol.jpg" class="sunset-img">
-                <h3>Pôr do Sol</h3><span class="price-tag">R$ 120,00</span>
-                <label>Data:</label><input type="date" id="data-sunset">
+                <h3 data-key="opt_sunset">Pôr do Sol</h3>
+                <span class="price-tag">R$ 120,00</span>
+                <label data-key="date_label">Data:</label><input type="date" id="data-sunset">
             </div>
 
             <div id="form-comum">
-                <textarea id="descricao" rows="4" placeholder="Descreva..."></textarea>
-                <button onclick="enviarChamado()" class="btn btn-success">Enviar Solicitação</button>
+                <textarea id="descricao" rows="4" placeholder="Descreva..." data-ph="desc_placeholder"></textarea>
+                <button onclick="enviarChamado()" class="btn btn-success" data-key="send_btn">Enviar Solicitação</button>
             </div>
             
-            <button id="btn-voltar" onclick="location.reload()" class="btn btn-hotel hidden" style="margin-top:10px;">Voltar</button>
+            <button id="btn-voltar" onclick="location.reload()" class="btn btn-hotel hidden" style="margin-top:10px;" data-key="back_btn">Voltar</button>
         </div>
 
         <div id="tela-admin" class="hidden dashboard-container">
@@ -251,6 +282,57 @@
         let isMaster = false;
         let todosDadosCache = [];
 
+        // --- DICIONÁRIO DE IDIOMAS COMPLETO ---
+        const translations = {
+            pt: { 
+                login_title: "Acesso ao Sistema", guest: "Hóspede", admin_area: "Área Administrativa", pass_placeholder: "Senha...", enter_btn: "Entrar", 
+                welcome_msg: "Bem-vindo! Como podemos ajudar?", room_placeholder: "Nº do Quarto *", phone_placeholder: "Telefone (Opcional)", select_default: "Selecione o que precisa...", 
+                opt_restaurante: "🍽️ Pedido Restaurante", opt_service: "🗣️ Fale com a Recepção", opt_maint: "🛠️ Manutenção", opt_beach: "🏖️ Aluguel Cadeira, Toalha, Cooler", opt_sunset: "🥂 Pôr do Sol com Espumante", opt_idea: "💡 Sugestão / Elogio", opt_complain: "📢 Reclamação", 
+                restaurante_msg: "Deseja fazer um pedido?", restaurante_btn: "🍽️ ABRIR CARDÁPIO DIGITAL",
+                beach_select_items: "Itens disponíveis:", beach_chair: "Cadeira", beach_towel: "Toalha", beach_cooler: "Cooler",
+                qty_placeholder: "Qtd", cooler_placeholder: "Ex: Cerveja, Água, Refrigerante...",
+                date_label: "Data:", desc_placeholder: "Alguma observação extra?", send_btn: "Enviar Solicitação", back_btn: "Voltar"
+            },
+            en: { 
+                login_title: "System Access", guest: "Guest", admin_area: "Staff Area", pass_placeholder: "Password...", enter_btn: "Login", 
+                welcome_msg: "Welcome! How can we help?", room_placeholder: "Room Number *", phone_placeholder: "Phone (Optional)", select_default: "Select what you need...", 
+                opt_restaurante: "🍽️ Restaurant Order", opt_service: "🗣️ Talk to Reception", opt_maint: "🛠️ Maintenance", opt_beach: "🏖️ Rent Beach Chair, Towel, Cooler", opt_sunset: "🥂 Sunset with Sparkling Wine", opt_idea: "💡 Suggestion / Compliment", opt_complain: "📢 Complaint", 
+                restaurante_msg: "Would you like to order?", restaurante_btn: "🍽️ OPEN DIGITAL MENU",
+                beach_select_items: "Available items:", beach_chair: "Chair", beach_towel: "Towel", beach_cooler: "Cooler",
+                qty_placeholder: "Qty", cooler_placeholder: "Ex: Beer, Water, Soda...",
+                date_label: "Date:", desc_placeholder: "Any extra comments?", send_btn: "Send Request", back_btn: "Back"
+            },
+            es: { 
+                login_title: "Acceso al Sistema", guest: "Huésped", admin_area: "Área Administrativa", pass_placeholder: "Contraseña...", enter_btn: "Entrar", 
+                welcome_msg: "¡Bienvenido! ¿Cómo podemos ayudar?", room_placeholder: "Número de Habitación *", phone_placeholder: "Teléfono (Opcional)", select_default: "Seleccione lo que necesita...", 
+                opt_restaurante: "🍽️ Pedido Restaurante", opt_service: "🗣️ Hable con Recepción", opt_maint: "🛠️ Mantenimiento", opt_beach: "🏖️ Alquiler Silla, Toalla, Hielera", opt_sunset: "🥂 Puesta de Sol con Espumoso", opt_idea: "💡 Sugerencia / Elogio", opt_complain: "📢 Queja", 
+                restaurante_msg: "¿Desea hacer un pedido?", restaurante_btn: "🍽️ ABRIR MENÚ DIGITAL",
+                beach_select_items: "Artículos disponibles:", beach_chair: "Silla", beach_towel: "Toalla", beach_cooler: "Hielera",
+                qty_placeholder: "Cant", cooler_placeholder: "Ej: Cerveza, Agua, Refresco...",
+                date_label: "Fecha:", desc_placeholder: "¿Alguna observación extra?", send_btn: "Enviar Solicitud", back_btn: "Volver"
+            }
+        };
+
+        window.mudarIdioma = function(lang) {
+            // Atualiza botões
+            document.querySelectorAll('.lang-btn').forEach(el => el.classList.remove('active'));
+            const seletores = { 'pt': '.color-br', 'en': '.color-en', 'es': '.color-es' };
+            document.querySelectorAll(seletores[lang]).forEach(el => el.classList.add('active'));
+
+            // Atualiza Textos
+            document.querySelectorAll('[data-key]').forEach(elem => {
+                const key = elem.getAttribute('data-key');
+                if(translations[lang][key]) elem.innerText = translations[lang][key];
+            });
+
+            // Atualiza Placeholders
+            document.querySelectorAll('[data-ph]').forEach(elem => {
+                const key = elem.getAttribute('data-ph');
+                if(translations[lang][key]) elem.placeholder = translations[lang][key];
+            });
+        }
+
+        // --- SISTEMA DE ABAS ---
         window.switchTab = function(tabName) {
             document.getElementById('view-board').classList.add('hidden');
             document.getElementById('view-reports').classList.add('hidden');
@@ -317,7 +399,7 @@
 
             let count = 0;
             lista.forEach(item => {
-                if (item.status === 'resolvido') return; // Filtra resolvidos do quadro
+                if (item.status === 'resolvido') return; 
                 count++;
                 let card = criarCartaoHTML(item);
                 let t = item.tipo;
@@ -369,6 +451,7 @@
 
             return `
             <div class="ticket-card ${classStatus}">
+                <div style="font-size:0.7rem; font-weight:bold; margin-bottom:5px; text-align:right;">${badgeText}</div>
                 <div class="card-top"><span class="card-time">🕒 ${hora}</span><span class="card-room">Q. ${chamado.quarto}</span></div>
                 <span class="card-desc">${chamado.descricao}</span>
                 ${chamado.telefone ? `<span class="card-obs">📞 ${chamado.telefone}</span>` : ''}
@@ -475,7 +558,7 @@
             else if(val === 'Sunset') document.getElementById('area-sunset').classList.remove('hidden');
             else if(val === 'Restaurante') {
                 document.getElementById('area-restaurante').classList.remove('hidden');
-                document.getElementById('form-comum').classList.add('hidden'); // Esconde botão de enviar
+                document.getElementById('form-comum').classList.add('hidden');
             }
         }
 
@@ -514,11 +597,6 @@
                 });
                 alert("Enviado!"); location.reload();
             } catch(e) { alert("Erro"); }
-        }
-
-        window.mudarIdioma = function(lang) {
-            // Implementação simplificada para não quebrar
-            console.log("Idioma mudado para:", lang);
         }
 
         const params = new URLSearchParams(window.location.search);
