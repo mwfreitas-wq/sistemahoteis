@@ -31,14 +31,11 @@
         .btn-logo { height: 30px; vertical-align: middle; margin-right: 10px; }
 
         /* --- IDIOMAS --- */
-        .lang-options { display: flex; gap: 15px; font-size: 0.95rem; background: #f5f5f5; padding: 5px 15px; border-radius: 20px;}
-        .lang-btn { cursor: pointer; font-weight: 600; opacity: 0.4; transition: opacity 0.2s; text-decoration: none; color: #555; }
-        .lang-btn:hover { opacity: 1; }
-        
-        /* Cores Ativas */
-        .lang-btn.active { opacity: 1; text-decoration: underline; font-weight: 900; }
+        .lang-options { display: flex; gap: 10px; font-size: 0.9rem; }
+        .lang-btn { cursor: pointer; font-weight: 700; opacity: 0.3; transition: opacity 0.2s; text-decoration: none; color: #333; }
+        .lang-btn:hover, .lang-btn.active { opacity: 1; text-decoration: underline; }
         .color-br.active { color: #000; }
-        .color-en.active { color: #0056b3; }
+        .color-us.active { color: #0056b3; }
         .color-es.active { color: #e74c3c; }
 
         /* Botões e Inputs */
@@ -48,8 +45,6 @@
         .btn-primary { background: linear-gradient(135deg, var(--primary), #00a8cc); color: white; }
         .btn-success { background: var(--success); color: white; }
         .btn-sm { padding: 8px 15px; width: auto; font-size: 0.9rem; }
-        
-        /* Inputs */
         input, select, textarea { width: 100%; padding: 14px; margin-bottom: 15px; border: 1px solid #999; border-radius: 8px; background: #fff; box-sizing: border-box; font-family: inherit; font-size: 1rem; color: #000;}
         .input-row { display: flex; gap: 10px; }
         .input-row input { flex: 1; }
@@ -59,10 +54,10 @@
         .btn-menu { background: #e65100; color: white; width: 100%; padding: 15px; font-weight: bold; border-radius: 8px; display: inline-block; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.2s; }
         .btn-menu:hover { background: #ff6d00; transform: scale(1.02); }
 
-        /* --- KIT PRAIA (ALINHAMENTO) --- */
+        /* --- KIT PRAIA --- */
         .beach-kit-container { background: #e3f2fd; border: 2px solid #90caf9; padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: left; }
-        .checkbox-row { display: flex; align-items: center; justify-content: flex-start; margin-bottom: 10px; min-height: 40px; gap: 10px; }
-        .checkbox-label { display: flex; align-items: center; gap: 8px; font-size: 1rem; cursor: pointer; font-weight: 600; color: #333; min-width: 120px; }
+        .checkbox-row { display: flex; align-items: center; justify-content: flex-start; margin-bottom: 10px; min-height: 40px; gap: 15px; }
+        .checkbox-label { display: flex; align-items: center; gap: 10px; font-size: 1rem; cursor: pointer; font-weight: 600; color: #333; min-width: 120px; }
         input[type="checkbox"] { transform: scale(1.3); margin: 0; cursor: pointer; }
         .dynamic-input { flex: 1; margin-bottom: 0 !important; padding: 8px !important; height: 38px; display: none; font-size: 0.9rem !important; border: 2px solid var(--primary); }
 
@@ -143,14 +138,11 @@
                     <span onclick="mudarIdioma('es')" class="lang-btn color-es">ES</span>
                 </div>
             </div>
-            
             <p id="subtitulo-hospede" data-key="welcome_msg">Bem-vindo!</p>
-            
             <div class="input-row">
                 <input type="text" id="quarto" placeholder="Nº do Quarto *" data-ph="room_placeholder" required>
                 <input type="text" id="telefone" placeholder="Telefone" data-ph="phone_placeholder">
             </div>
-            
             <select id="tipo" onchange="verificarOpcao()">
                 <option value="" disabled selected data-key="select_default">Selecione...</option>
                 <option value="Restaurante" id="opt-restaurante" data-key="opt_restaurante">🍽️ Pedido Restaurante</option>
@@ -263,7 +255,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, query, where, onSnapshot, updateDoc, doc, orderBy, serverTimestamp } 
+        import { getFirestore, collection, addDoc, query, where, onSnapshot, updateDoc, doc, orderBy, serverTimestamp, getDocs } 
         from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
         const firebaseConfig = {
@@ -282,7 +274,7 @@
         let isMaster = false;
         let todosDadosCache = [];
 
-        // --- DICIONÁRIO DE IDIOMAS COMPLETO ---
+        // --- SISTEMA DE IDIOMAS ---
         const translations = {
             pt: { 
                 login_title: "Acesso ao Sistema", guest: "Hóspede", admin_area: "Área Administrativa", pass_placeholder: "Senha...", enter_btn: "Entrar", 
@@ -314,25 +306,19 @@
         };
 
         window.mudarIdioma = function(lang) {
-            // Atualiza botões
             document.querySelectorAll('.lang-btn').forEach(el => el.classList.remove('active'));
             const seletores = { 'pt': '.color-br', 'en': '.color-en', 'es': '.color-es' };
             document.querySelectorAll(seletores[lang]).forEach(el => el.classList.add('active'));
-
-            // Atualiza Textos
             document.querySelectorAll('[data-key]').forEach(elem => {
                 const key = elem.getAttribute('data-key');
                 if(translations[lang][key]) elem.innerText = translations[lang][key];
             });
-
-            // Atualiza Placeholders
             document.querySelectorAll('[data-ph]').forEach(elem => {
                 const key = elem.getAttribute('data-ph');
                 if(translations[lang][key]) elem.placeholder = translations[lang][key];
             });
         }
 
-        // --- SISTEMA DE ABAS ---
         window.switchTab = function(tabName) {
             document.getElementById('view-board').classList.add('hidden');
             document.getElementById('view-reports').classList.add('hidden');
@@ -585,9 +571,11 @@
             if (tipo === 'Sunset') {
                 dataReserva = document.getElementById('data-sunset').value;
                 if(!dataReserva) return alert("Escolha a data.");
-                const q = query(collection(db, "chamados"), where("tipo", "==", "Sunset"), where("hotel", "==", hotelAtual), where("dataReserva", "==", dataReserva));
-                const snap = await getDocs(q);
-                if(snap.size >= 5) return alert("Data lotada!");
+                try {
+                    const q = query(collection(db, "chamados"), where("tipo", "==", "Sunset"), where("hotel", "==", hotelAtual), where("dataReserva", "==", dataReserva));
+                    const snap = await getDocs(q);
+                    if(snap.size >= 5) return alert("Data lotada!");
+                } catch(e) { console.error("Erro banco:", e); }
                 desc = `[SUNSET] Data: ${dataReserva} | R$ 120,00 \nObs: ${desc}`;
             }
             if(!quarto || !tipo) return alert("Preencha Quarto e Tipo.");
@@ -596,7 +584,7 @@
                     hotel: hotelAtual, quarto, telefone, tipo, descricao: desc, status: 'pendente', dataReserva, data: serverTimestamp()
                 });
                 alert("Enviado!"); location.reload();
-            } catch(e) { alert("Erro"); }
+            } catch(e) { alert("Erro ao enviar"); console.error(e); }
         }
 
         const params = new URLSearchParams(window.location.search);
