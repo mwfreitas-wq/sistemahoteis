@@ -16,7 +16,7 @@
             --danger: #d32f2f; 
             --warning: #f57f17;
             --success: #2e7d32;
-            --gold: #ffca28; /* Cor das estrelas */
+            --gold: #ffca28;
         }
 
         body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 20px; display: flex; justify-content: center; min-height: 100vh; }
@@ -51,34 +51,11 @@
         .input-row input { flex: 1; }
 
         /* --- ESTRELAS (AVALIAÇÃO) --- */
-        .rating-container {
-            background: #fff8e1;
-            border: 2px solid #ffe082;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            text-align: center;
-            animation: slideDown 0.3s ease-out;
-        }
-        .stars-wrapper {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 5px;
-        }
-        .star {
-            font-size: 2.5rem;
-            cursor: pointer;
-            color: #ddd; 
-            transition: color 0.2s;
-        }
-        .star.active {
-            color: var(--gold); 
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .star:hover {
-            transform: scale(1.1);
-        }
+        .rating-container { background: #fff8e1; border: 2px solid #ffe082; padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: center; animation: slideDown 0.3s ease-out; }
+        .stars-wrapper { display: flex; justify-content: center; gap: 10px; margin-top: 5px; }
+        .star { font-size: 2.5rem; cursor: pointer; color: #ddd; transition: color 0.2s; }
+        .star.active { color: var(--gold); text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .star:hover { transform: scale(1.1); }
 
         /* --- RESTAURANTE --- */
         .restaurante-container { background: #fff3e0; border: 2px solid #ffb74d; padding: 20px; border-radius: 10px; margin-bottom: 15px; text-align: center; }
@@ -86,35 +63,36 @@
         .btn-menu:hover { background: #ff6d00; transform: scale(1.02); }
 
         /* --- KIT PRAIA --- */
-        .beach-kit-container { background: #e3f2fd; border: 2px solid #90caf9; padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: left; }
-        .checkbox-row { display: flex; align-items: center; justify-content: flex-start; margin-bottom: 10px; min-height: 40px; gap: 15px; }
-        .checkbox-label { display: flex; align-items: center; gap: 10px; font-size: 1rem; cursor: pointer; font-weight: 600; color: #333; min-width: 120px; }
-        input[type="checkbox"] { transform: scale(1.3); margin: 0; cursor: pointer; }
-        .dynamic-input { flex: 1; margin-bottom: 0 !important; padding: 8px !important; height: 38px; display: none; font-size: 0.9rem !important; border: 2px solid var(--primary); }
+        .beach-kit-container { background: #e3f2fd; border: 2px solid #90caf9; padding: 20px; border-radius: 10px; margin-bottom: 15px; text-align: left !important; }
+        .kit-item { margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid rgba(0, 86, 179, 0.15); display: block; width: 100%; }
+        .kit-item:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0;}
+        .checkbox-wrapper { display: flex; flex-direction: row; align-items: center; justify-content: flex-start; gap: 12px; cursor: pointer; width: 100%; text-align: left; }
+        .checkbox-wrapper input[type="checkbox"] { width: 24px; height: 24px; margin: 0; cursor: pointer; flex-shrink: 0; display: block; }
+        .checkbox-wrapper .label-text { font-size: 0.95rem; font-weight: 700; color: #333; display: block; line-height: 1.2; }
+        .dynamic-input { width: 100%; margin-top: 12px !important; margin-bottom: 0 !important; padding: 12px !important; display: none; font-size: 0.95rem !important; border: 2px solid var(--primary) !important; border-radius: 8px !important; box-sizing: border-box; background-color: #fff !important; }
+        .total-area { background: #ffffff; padding: 15px; border-radius: 8px; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; border: 2px dashed var(--primary); }
+        .total-valor { font-weight: 900; color: var(--danger); font-size: 1.3rem; }
 
         /* --- PÔR DO SOL --- */
         .sunset-container { background: #fce4ec; border: 2px solid #f06292; padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: center; }
         .sunset-img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
-        .price-tag { background: #2ecc71; color: white; padding: 5px 10px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; margin-bottom: 10px; display: inline-block;}
-        .time-info { font-size: 0.9rem; color: #666; margin-bottom: 10px; display: block; }
+        .price-tag { background: #2ecc71; color: white; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.95rem; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.1);}
+        .time-info { background: #fff; color: #d32f2f; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.95rem; border: 2px solid #f06292; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.05);}
 
         /* --- DASHBOARD MASTER --- */
         .dashboard-container { width: 100%; margin-top: 10px; padding: 0 10px; }
         .tabs-container { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #ddd; padding-bottom: 10px; }
         .tab-btn { padding: 10px 20px; border: none; background: transparent; font-weight: bold; color: #666; cursor: pointer; font-size: 1.1rem; border-radius: 8px; }
         .tab-btn.active { background: var(--primary); color: white; box-shadow: 0 4px 10px rgba(0,86,179,0.3); }
-
         .board-grid { display: flex; flex-wrap: wrap; gap: 20px; align-items: start; justify-content: center; width: 100%; }
         .board-column { background: #ffffff; padding: 10px; border-radius: 8px; width: 300px; flex-grow: 1; max-width: 350px; border-top: 5px solid #ccc; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; gap: 10px; min-height: 150px; }
         .board-header { font-weight: 900; color: #222; text-transform: uppercase; font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; border-bottom: 1px solid #eee; }
-        
         .ticket-card { display: block !important; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); text-align: left; border: 1px solid #ddd; margin-bottom: 10px; min-height: 100px; }
         .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
         .card-time { background: #333; color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
         .card-room { font-size: 1.2rem; font-weight: 900; color: #000; background: #e3f2fd; padding: 4px 10px; border-radius: 4px; border: 1px solid #90caf9;}
-        .card-desc { font-size: 1rem; color: #000; font-weight: 600; line-height: 1.4; display: block; margin-bottom: 10px; }
+        .card-desc { font-size: 0.95rem; color: #000; font-weight: 600; line-height: 1.4; display: block; margin-bottom: 10px; white-space: pre-wrap; }
         .card-obs { font-size: 0.85rem; color: #555; font-style: italic; background: #f5f5f5; padding: 5px; border-radius: 4px; display: block; margin-bottom: 10px; }
-
         .status-red { border-left: 10px solid var(--danger); background-color: #fff0f0; }
         .btn-start { width: 100%; padding: 10px; background: #fff3e0; border: 1px solid #ffcc80; color: #e65100; font-weight: bold; cursor: pointer; border-radius: 6px; }
         .status-yellow { border-left: 10px solid var(--warning); background-color: #fffde7; }
@@ -134,6 +112,29 @@
         .report-table th { text-align: left; padding: 10px; background: #f5f5f5; border-bottom: 2px solid #ddd; }
         .report-table td { padding: 10px; border-bottom: 1px solid #eee; }
         
+        /* LINHA DA TABELA CLICÁVEL */
+        .clickable-row { cursor: pointer; transition: background 0.2s; }
+        .clickable-row:hover { background-color: #e3f2fd !important; }
+
+        /* --- MODAL DETALHES --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center;
+            z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: all; }
+        .modal-content {
+            background: white; width: 90%; max-width: 500px; padding: 25px; border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); position: relative; transform: translateY(-20px);
+            transition: transform 0.3s ease; max-height: 80vh; overflow-y: auto;
+        }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+        .close-btn { position: absolute; top: 15px; right: 15px; font-size: 1.8rem; cursor: pointer; color: #999; border: none; background: none; line-height: 1; }
+        .close-btn:hover { color: #d32f2f; }
+        .modal-body p { margin: 10px 0; line-height: 1.5; font-size: 1rem; color: #444; }
+        .modal-body strong { color: #111; }
+        .detail-desc { background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #e0e0e0; margin-top: 8px; white-space: pre-wrap; font-size: 0.95rem; color: #222; }
+
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
@@ -208,38 +209,50 @@
             </div>
 
             <div id="area-kit-praia" class="beach-kit-container hidden">
-                <strong style="color:#0056b3; display:block; margin-bottom:10px;" data-key="beach_select_items">Itens disponíveis:</strong>
                 
-                <div class="checkbox-row">
-                    <label class="checkbox-label">
-                        <input type="checkbox" id="check-cadeira" onchange="toggleInput('check-cadeira','qtd-cadeira')"> 
-                        <span data-key="beach_chair">Cadeira</span>
+                <div class="kit-item">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" id="check-cadeira" onchange="toggleInput('check-cadeira','qtd-cadeira'); calcularTotalPraia()"> 
+                        <span class="label-text" data-key="beach_chair_label">Cadeira (R$ 15/un - Máx 4)</span>
                     </label>
-                    <input type="number" id="qtd-cadeira" class="dynamic-input" placeholder="Qtd" data-ph="qty_placeholder">
+                    <input type="number" id="qtd-cadeira" class="dynamic-input" min="1" max="4" value="1" placeholder="Quantidade" oninput="validarMaximo(this, 4); calcularTotalPraia()">
                 </div>
                 
-                <div class="checkbox-row">
-                    <label class="checkbox-label">
-                        <input type="checkbox" id="check-toalha" onchange="toggleInput('check-toalha','qtd-toalha')"> 
-                        <span data-key="beach_towel">Toalha</span>
+                <div class="kit-item">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" id="check-toalha" onchange="toggleInput('check-toalha','qtd-toalha'); calcularTotalPraia()"> 
+                        <span class="label-text" data-key="beach_towel_label">Toalha (R$ 10/un - Máx 4)</span>
                     </label>
-                    <input type="number" id="qtd-toalha" class="dynamic-input" placeholder="Qtd" data-ph="qty_placeholder">
+                    <input type="number" id="qtd-toalha" class="dynamic-input" min="1" max="4" value="1" placeholder="Quantidade" oninput="validarMaximo(this, 4); calcularTotalPraia()">
                 </div>
                 
-                <div class="checkbox-row">
-                    <label class="checkbox-label">
-                        <input type="checkbox" id="check-cooler" onchange="toggleInput('check-cooler','detalhe-cooler')"> 
-                        <span data-key="beach_cooler">Cooler</span>
+                <div class="kit-item">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" id="check-cooler" onchange="toggleInput('check-cooler','detalhe-cooler'); calcularTotalPraia()"> 
+                        <span class="label-text" data-key="beach_cooler_label">Cooler com Gelo (R$ 50 - Consumo)</span>
                     </label>
-                    <input type="text" id="detalhe-cooler" class="dynamic-input" placeholder="Ex: Cerveja, Água..." data-ph="cooler_placeholder">
+                    <input type="text" id="detalhe-cooler" class="dynamic-input" placeholder="Ex: Cerveja, Água, Refrigerante..." data-ph="cooler_placeholder">
+                </div>
+
+                <div class="total-area">
+                    <span data-key="total_label" style="color:#555; font-weight: 600;">Valor Total Estimado:</span> 
+                    <span class="total-valor" id="valor-total-praia">R$ 0,00</span>
                 </div>
             </div>
 
             <div id="area-sunset" class="sunset-container hidden">
-                <img src="img/por do sol.jpg" class="sunset-img">
-                <h3 data-key="opt_sunset">Pôr do Sol</h3>
-                <span class="price-tag">R$ 120,00</span>
-                <label data-key="date_label">Data:</label><input type="date" id="data-sunset">
+                <img src="img/por do sol.jpg" class="sunset-img" alt="Pôr do Sol">
+                <h3 data-key="opt_sunset" style="margin-top: 5px; margin-bottom: 10px;">Pôr do Sol</h3>
+                
+                <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px;">
+                    <span class="price-tag">R$ 120,00</span>
+                    <span class="time-info">⏰ 16:30 - 18:30</span>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.6); padding: 10px; border-radius: 8px; border: 1px solid #f8bbd0; text-align: left;">
+                    <label data-key="date_label" style="font-weight:bold; color:#d32f2f; display:block; margin-bottom:5px;">Data da Reserva:</label>
+                    <input type="date" id="data-sunset" style="margin-bottom: 0;">
+                </div>
             </div>
 
             <div id="form-comum">
@@ -297,6 +310,16 @@
                 </div>
             </div>
         </div>
+
+        <div id="modal-detalhe" class="modal-overlay" onclick="fecharModal(event)">
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <button class="close-btn" onclick="fecharModal()">×</button>
+                <h3 style="margin-top:0; color:var(--primary); border-bottom:2px solid #eee; padding-bottom:10px;">Detalhes do Chamado</h3>
+                <div class="modal-body" id="modal-body-content">
+                    </div>
+            </div>
+        </div>
+
     </div>
 
     <script type="module">
@@ -319,7 +342,7 @@
         let hotelAtual = ""; 
         let isMaster = false;
         let todosDadosCache = [];
-        let currentRating = 0; // Armazena a nota
+        let currentRating = 0; 
 
         // --- SISTEMA DE IDIOMAS ---
         const translations = {
@@ -328,27 +351,30 @@
                 welcome_msg: "Bem-vindo! Como podemos ajudar?", room_placeholder: "Nº do Quarto *", phone_placeholder: "Telefone (Opcional)", select_default: "Selecione o que precisa...", 
                 opt_restaurante: "🍽️ Pedido Restaurante", opt_service: "🗣️ Fale com a Recepção", opt_maint: "🛠️ Manutenção", opt_beach: "🏖️ Aluguel Cadeira, Toalha, Cooler", opt_sunset: "🥂 Pôr do Sol com Espumante", opt_idea: "💡 Sugestão / Elogio / Avaliação", opt_complain: "📢 Reclamação", 
                 restaurante_msg: "Deseja fazer um pedido?", restaurante_btn: "🍽️ ABRIR CARDÁPIO DIGITAL",
-                beach_select_items: "Itens disponíveis:", beach_chair: "Cadeira", beach_towel: "Toalha", beach_cooler: "Cooler",
+                beach_select_items: "Itens disponíveis:", 
+                beach_chair_label: "Cadeira (R$ 15/un - Máx 4)", beach_towel_label: "Toalha (R$ 10/un - Máx 4)", beach_cooler_label: "Cooler com Gelo (R$ 50 - Consumo)", total_label: "Valor Total Estimado:",
                 qty_placeholder: "Qtd", cooler_placeholder: "Ex: Cerveja, Água, Refrigerante...",
-                date_label: "Data:", desc_placeholder: "Descreva...", send_btn: "Enviar Solicitação", back_btn: "Voltar"
+                date_label: "Data da Reserva:", desc_placeholder: "Descreva...", send_btn: "Enviar Solicitação", back_btn: "Voltar"
             },
             en: { 
                 login_title: "System Access", guest: "Guest", admin_area: "Staff Area", pass_placeholder: "Password...", enter_btn: "Login", 
                 welcome_msg: "Welcome! How can we help?", room_placeholder: "Room Number *", phone_placeholder: "Phone (Optional)", select_default: "Select what you need...", 
                 opt_restaurante: "🍽️ Restaurant Order", opt_service: "🗣️ Talk to Reception", opt_maint: "🛠️ Maintenance", opt_beach: "🏖️ Rent Beach Chair, Towel, Cooler", opt_sunset: "🥂 Sunset with Sparkling Wine", opt_idea: "💡 Suggestion / Compliment / Rating", opt_complain: "📢 Complaint", 
                 restaurante_msg: "Would you like to order?", restaurante_btn: "🍽️ OPEN DIGITAL MENU",
-                beach_select_items: "Available items:", beach_chair: "Chair", beach_towel: "Towel", beach_cooler: "Cooler",
+                beach_select_items: "Available items:", 
+                beach_chair_label: "Chair (R$ 15/ea - Max 4)", beach_towel_label: "Towel (R$ 10/ea - Max 4)", beach_cooler_label: "Cooler with Ice (R$ 50 - Consumption)", total_label: "Estimated Total:",
                 qty_placeholder: "Qty", cooler_placeholder: "Ex: Beer, Water, Soda...",
-                date_label: "Date:", desc_placeholder: "Describe...", send_btn: "Send Request", back_btn: "Back"
+                date_label: "Reservation Date:", desc_placeholder: "Describe...", send_btn: "Send Request", back_btn: "Back"
             },
             es: { 
                 login_title: "Acceso al Sistema", guest: "Huésped", admin_area: "Área Administrativa", pass_placeholder: "Contraseña...", enter_btn: "Entrar", 
                 welcome_msg: "¡Bienvenido! ¿Cómo podemos ayudar?", room_placeholder: "Número de Habitación *", phone_placeholder: "Teléfono (Opcional)", select_default: "Seleccione lo que necesita...", 
                 opt_restaurante: "🍽️ Pedido Restaurante", opt_service: "🗣️ Hable con Recepción", opt_maint: "🛠️ Mantenimiento", opt_beach: "🏖️ Alquiler Silla, Toalla, Hielera", opt_sunset: "🥂 Puesta de Sol con Espumoso", opt_idea: "💡 Sugerencia / Elogio / Evaluación", opt_complain: "📢 Queja", 
                 restaurante_msg: "¿Desea hacer un pedido?", restaurante_btn: "🍽️ ABRIR MENÚ DIGITAL",
-                beach_select_items: "Artículos disponibles:", beach_chair: "Silla", beach_towel: "Toalla", beach_cooler: "Hielera",
+                beach_select_items: "Artículos disponibles:", 
+                beach_chair_label: "Silla (R$ 15/cu - Máx 4)", beach_towel_label: "Toalla (R$ 10/cu - Máx 4)", beach_cooler_label: "Hielera c/ Hielo (R$ 50 - Consumo)", total_label: "Total Estimado:",
                 qty_placeholder: "Cant", cooler_placeholder: "Ej: Cerveza, Agua, Refresco...",
-                date_label: "Fecha:", desc_placeholder: "Describa...", send_btn: "Enviar Solicitud", back_btn: "Volver"
+                date_label: "Fecha de Reserva:", desc_placeholder: "Describa...", send_btn: "Enviar Solicitud", back_btn: "Volver"
             }
         };
 
@@ -356,16 +382,36 @@
             document.querySelectorAll('.lang-btn').forEach(el => el.classList.remove('active'));
             const seletores = { 'pt': '.color-br', 'en': '.color-en', 'es': '.color-es' };
             document.querySelectorAll(seletores[lang]).forEach(el => el.classList.add('active'));
-
             document.querySelectorAll('[data-key]').forEach(elem => {
                 const key = elem.getAttribute('data-key');
                 if(translations[lang][key]) elem.innerText = translations[lang][key];
             });
-
             document.querySelectorAll('[data-ph]').forEach(elem => {
                 const key = elem.getAttribute('data-ph');
                 if(translations[lang][key]) elem.placeholder = translations[lang][key];
             });
+        }
+
+        // --- CÁLCULOS DO KIT PRAIA ---
+        window.validarMaximo = function(elemento, maximo) {
+            if (elemento.value > maximo) elemento.value = maximo;
+            if (elemento.value < 1 && elemento.value !== '') elemento.value = 1;
+        }
+
+        window.calcularTotalPraia = function() {
+            let total = 0;
+            if(document.getElementById('check-cadeira').checked) {
+                let qtd = parseInt(document.getElementById('qtd-cadeira').value) || 1;
+                total += (qtd * 15);
+            }
+            if(document.getElementById('check-toalha').checked) {
+                let qtd = parseInt(document.getElementById('qtd-toalha').value) || 1;
+                total += (qtd * 10);
+            }
+            if(document.getElementById('check-cooler').checked) {
+                total += 50;
+            }
+            document.getElementById('valor-total-praia').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
         }
 
         window.setRating = function(n) {
@@ -559,8 +605,57 @@
             ultimos.forEach(d => {
                 let duracao = "--";
                 if((d.status === 'resolvido' || d.status === 'arquivado') && d.dateObj && d.resDateObj) duracao = Math.round((d.resDateObj - d.dateObj)/1000/60) + " min";
-                tbodyAudit.innerHTML += `<tr><td>${d.dateObj?.toLocaleString()}</td><td>${d.quarto}</td><td>${d.tipo}</td><td>${d.status}</td><td>${duracao}</td></tr>`;
+                
+                // NOVO: Adicionado onclick para abrir o modal
+                tbodyAudit.innerHTML += `<tr class="clickable-row" onclick="abrirDetalheChamado('${d.id}')" title="Clique para ver os detalhes completos">
+                    <td>${d.dateObj?.toLocaleString()}</td>
+                    <td>${d.quarto}</td>
+                    <td>${d.tipo}</td>
+                    <td style="text-transform: capitalize;">${d.status}</td>
+                    <td>${duracao}</td>
+                </tr>`;
             });
+        }
+
+        // --- FUNÇÕES DO MODAL DE DETALHES ---
+        window.abrirDetalheChamado = function(id) {
+            let chamado = todosDadosCache.find(c => c.id === id);
+            if(!chamado) return;
+
+            let duracao = "--";
+            if((chamado.status === 'resolvido' || chamado.status === 'arquivado') && chamado.dateObj && chamado.resDateObj) {
+                duracao = Math.round((chamado.resDateObj - chamado.dateObj)/1000/60) + " minutos";
+            }
+
+            let corStatus = '#d32f2f'; // pendente
+            if(chamado.status === 'andamento') corStatus = '#f57f17';
+            if(chamado.status === 'resolvido' || chamado.status === 'arquivado') corStatus = '#2e7d32';
+
+            let html = `
+                <p><strong>🏨 Unidade:</strong> ${chamado.hotel}</p>
+                <p><strong>🚪 Quarto:</strong> <span style="font-size: 1.1rem; color: var(--primary); font-weight: bold;">${chamado.quarto}</span></p>
+                <p><strong>📞 Telefone:</strong> ${chamado.telefone || 'Não informado'}</p>
+                <p><strong>🏷️ Categoria:</strong> ${chamado.tipo}</p>
+                <p><strong>📊 Status Atual:</strong> <span style="text-transform:uppercase; font-weight:bold; color: ${corStatus}">${chamado.status}</span></p>
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+                <p><strong>🕒 Abertura:</strong> ${chamado.dateObj ? chamado.dateObj.toLocaleString() : '--'}</p>
+                <p><strong>✅ Fechamento:</strong> ${chamado.resDateObj ? chamado.resDateObj.toLocaleString() : 'Ainda em aberto'}</p>
+                <p><strong>⏳ Tempo de Resolução:</strong> ${duracao}</p>
+                ${chamado.dataReserva ? `<p><strong>📅 Data Reserva (Sunset):</strong> <span style="color: #d32f2f; font-weight:bold;">${chamado.dataReserva}</span></p>` : ''}
+                <div style="margin-top: 15px;">
+                    <strong>📝 Descrição / Pedido do Hóspede:</strong>
+                    <div class="detail-desc">${chamado.descricao || 'Nenhuma descrição fornecida.'}</div>
+                </div>
+            `;
+
+            document.getElementById('modal-body-content').innerHTML = html;
+            document.getElementById('modal-detalhe').classList.add('active');
+        }
+
+        window.fecharModal = function(event) {
+            // Fecha se clicar no botão X ou no fundo escuro fora do quadro branco
+            if(event && event.target.id !== 'modal-detalhe' && !event.target.classList.contains('close-btn')) return;
+            document.getElementById('modal-detalhe').classList.remove('active');
         }
 
         window.mudarStatus = async function(id, novoStatus) {
@@ -585,19 +680,19 @@
             document.getElementById('tela-hospede').classList.remove('hidden');
             
             const logoImg = document.getElementById('logo-hotel-topo');
-            const linkCardapio = document.getElementById('link-cardapio'); // Pega o botão do cardápio
+            const linkCardapio = document.getElementById('link-cardapio');
             
             if(hotel === 'Hit Hotel') {
                 logoImg.src = "logo_hit.png";
-                linkCardapio.href = "https://mwfreitas-wq.github.io/cardapiolavista2/?hotel=hit"; // Define URL Hit
+                linkCardapio.href = "https://mwfreitas-wq.github.io/cardapiolavista2/?hotel=hit";
             }
             else if(hotel === 'Porto Salvador') {
                 logoImg.src = "logo_porto.png";
-                linkCardapio.href = "https://mwfreitas-wq.github.io/cardapiolavista2/?hotel=porto"; // Define URL Porto
+                linkCardapio.href = "https://mwfreitas-wq.github.io/cardapiolavista2/?hotel=porto";
             }
             else {
                 logoImg.src = "logo_ancoras.png";
-                linkCardapio.href = "#"; // Âncoras não usa
+                linkCardapio.href = "#";
             }
             
             const optionPraia = document.getElementById('opt-praia');
@@ -618,7 +713,10 @@
             document.getElementById('area-avaliacao').classList.add('hidden');
             document.getElementById('form-comum').classList.remove('hidden');
 
-            if(val === 'Praia') document.getElementById('area-kit-praia').classList.remove('hidden');
+            if(val === 'Praia') {
+                document.getElementById('area-kit-praia').classList.remove('hidden');
+                calcularTotalPraia();
+            }
             else if(val === 'Sunset') document.getElementById('area-sunset').classList.remove('hidden');
             else if(val === 'Restaurante') {
                 document.getElementById('area-restaurante').classList.remove('hidden');
@@ -632,7 +730,14 @@
         window.toggleInput = function(checkId, inputId) {
             let chk = document.getElementById(checkId);
             let inp = document.getElementById(inputId);
-            if(chk.checked) { inp.style.display = 'block'; inp.focus(); } else { inp.style.display = 'none'; inp.value=''; }
+            if(chk.checked) { 
+                inp.style.display = 'block'; 
+                if(inp.type === 'number' && !inp.value) inp.value = 1;
+                inp.focus(); 
+            } else { 
+                inp.style.display = 'none'; 
+                if(inp.type === 'number') inp.value = 1; else inp.value = '';
+            }
         }
 
         window.enviarChamado = async function() {
@@ -648,21 +753,45 @@
 
             if (tipo === 'Praia') {
                 let itens = [];
-                if(document.getElementById('check-cadeira').checked) itens.push(`Cadeira (${document.getElementById('qtd-cadeira').value||1})`);
-                if(document.getElementById('check-toalha').checked) itens.push(`Toalha (${document.getElementById('qtd-toalha').value||1})`);
-                if(document.getElementById('check-cooler').checked) itens.push(`Cooler [${document.getElementById('detalhe-cooler').value}]`);
-                if(itens.length===0) return alert("Selecione um item.");
-                desc = `[ALUGUEL]: ${itens.join(', ')} \nObs: ${desc}`;
+                let totalSoma = 0;
+
+                if(document.getElementById('check-cadeira').checked) {
+                    let q = parseInt(document.getElementById('qtd-cadeira').value) || 1;
+                    itens.push(`Cadeira (${q}x R$15 = R$${q*15})`);
+                    totalSoma += (q*15);
+                }
+                if(document.getElementById('check-toalha').checked) {
+                    let q = parseInt(document.getElementById('qtd-toalha').value) || 1;
+                    itens.push(`Toalha (${q}x R$10 = R$${q*10})`);
+                    totalSoma += (q*10);
+                }
+                if(document.getElementById('check-cooler').checked) {
+                    let bebida = document.getElementById('detalhe-cooler').value || 'Não informado';
+                    itens.push(`Cooler (1x R$50 - Consumo: ${bebida})`);
+                    totalSoma += 50;
+                }
+                
+                if(itens.length === 0) return alert("Selecione um item da lista de praia.");
+                
+                desc = `[TOTAL: R$ ${totalSoma},00]\nItens: ${itens.join(' | ')}\nObs: ${desc}`;
             }
             
             if (tipo === 'Sunset') {
                 dataReserva = document.getElementById('data-sunset').value;
-                if(!dataReserva) return alert("Escolha a data.");
+                if(!dataReserva) {
+                    return alert("Por favor, escolha a data da reserva do Pôr do Sol.");
+                }
+                
                 try {
                     const q = query(collection(db, "chamados"), where("tipo", "==", "Sunset"), where("hotel", "==", hotelAtual), where("dataReserva", "==", dataReserva));
                     const snap = await getDocs(q);
-                    if(snap.size >= 5) return alert("Data lotada!");
-                } catch(e) { console.error(e); }
+                    if(snap.size >= 5) {
+                        return alert(`Desculpe, o dia ${dataReserva} já está com as 5 vagas esgotadas. Escolha outra data.`);
+                    }
+                } catch(e) { 
+                    console.error("Erro ao verificar vagas:", e); 
+                }
+                
                 desc = `[SUNSET] Data: ${dataReserva} | R$ 120,00 \nObs: ${desc}`;
             }
 
@@ -670,7 +799,7 @@
                 desc = `[AVALIAÇÃO: ${currentRating} ESTRELAS] \n${desc}`;
             }
 
-            if(!quarto || !tipo) return alert("Preencha Quarto e Tipo.");
+            if(!quarto || !tipo) return alert("Preencha Quarto e Tipo de solicitação.");
             
             try {
                 const btn = document.querySelector('.btn-success');
